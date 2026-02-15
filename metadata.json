@@ -1,0 +1,8 @@
+{
+  "name": "The Silent Partner",
+  "description": "An AI-powered operational command center. Features the 'Mila Musk' AI Chief of Staff for tax strategy, fleet management, and operational efficiency analysis.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation"
+  ]
+}
