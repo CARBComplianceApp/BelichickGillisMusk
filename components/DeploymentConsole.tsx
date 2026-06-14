@@ -25,7 +25,13 @@ vercel login
 vercel link --project gia-website-2026-02-13
 
 # 2. CONFIGURE ENVIRONMENT VARIABLES
-vercel env add API_KEY production
+vercel env add GEMINI_API_KEY production
+vercel env add GOOGLE_SERVICE_ACCOUNT_KEY production
+vercel env add GOOGLE_IMPERSONATE_USER production "bryan@norcalcarbmobile.com"
+# OR for OAuth instead of service account:
+# vercel env add GOOGLE_CLIENT_ID production
+# vercel env add GOOGLE_CLIENT_SECRET production
+# vercel env add GOOGLE_REFRESH_TOKEN production
 vercel env add MILA_AGENT_ID production "mila-v2-09"
 vercel env add KESHA_VOICE_SECRET production "encrypted_voice_k_99"
 vercel env add NODE_ENV production
