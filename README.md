@@ -6,7 +6,9 @@
 
 This contains everything you need to run your app locally.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1c7_qRo-LGiJETE0UeS_n7Zr1upsRuho4
+View your app in AI Studio: https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137?showPreview=true&showAssistant=true&project=gen-lang-client-0013150741
+
+Production domain: https://silverbackai.agency (redirects to AI Studio)
 
 ## Run Locally
 

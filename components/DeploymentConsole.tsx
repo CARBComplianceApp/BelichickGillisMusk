@@ -10,14 +10,36 @@ const DeploymentConsole: React.FC = () => {
     { name: 'GIA Website (2026-02-13)', status: 'STAGED', color: 'text-emerald-500', desc: 'The Face. Agency landing page. Optimized for Vercel edge deployment.' },
     { name: 'Kesha (Voice Agent)', status: 'DEPLOYING', color: 'text-blue-400', desc: 'The Communicator. Live API enabled. Deployment to Vercel Edge active.' },
     { name: 'Make Automation (GIA)', status: 'LEGACY_DETECTED', color: 'text-mil-danger', desc: 'The Backend. Lead syncing & CRM automation via Make.com. REQUIRES PURGE.' },
+    { name: 'Silverback AI App (AI Studio)', status: 'ACTIVE', color: 'text-emerald-500', desc: 'CARBComplianceApp/Silverback-Ai-App on main. Live at aistudio.google.com.' },
+    { name: 'silverbackai.agency', status: 'REDIRECT_PENDING', color: 'text-amber-500', desc: 'DNS on Cloudflare. Redirect to AI Studio app preview URL.' },
     { name: 'NorCal CARB Mobile', status: 'ACTIVE', color: 'text-emerald-500', desc: 'Mobile CARB Compliance project: clean-truck.' },
     { name: 'cleantruckcheckfairfield.com', status: 'LIVE', color: 'text-emerald-500', desc: 'DNS active on Cloudflare. Mapping to operational funnel.' },
   ];
 
   const deploymentScript = `
 # =========================================================
-# VERCEL DEPLOYMENT PROTOCOL: GIA_Website_2026-02-13
-# TARGET: gillis.agency
+# CLOUDFLARE REDIRECT: silverbackai.agency -> AI Studio
+# APP: CARBComplianceApp/Silverback-Ai-App (main)
+# =========================================================
+
+# Option A — Cloudflare Dashboard (recommended)
+# 1. Log in to Cloudflare > silverbackai.agency
+# 2. Rules > Redirect Rules > Create rule
+# 3. Match: hostname equals silverbackai.agency (and www.silverbackai.agency)
+# 4. Action: Static redirect (301) to:
+#    https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137?showPreview=true&showAssistant=true&project=gen-lang-client-0013150741
+# 5. Save and deploy. Remove any conflicting Page Rules or Workers.
+
+# Option B — Cloudflare API (requires CF_API_TOKEN + ZONE_ID)
+# curl -X POST "https://api.cloudflare.com/client/v4/zones/\$ZONE_ID/rulesets/phases/http_request_dynamic_redirect/entrypoint" \\
+#   -H "Authorization: Bearer \$CF_API_TOKEN" \\
+#   -H "Content-Type: application/json" \\
+#   --data '{"rules":[{"expression":"(http.host eq \\"silverbackai.agency\\") or (http.host eq \\"www.silverbackai.agency\\")","action":"redirect","action_parameters":{"from_value":{"status_code":301,"target_url":{"expression":"\\"https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137?showPreview=true&showAssistant=true&project=gen-lang-client-0013150741\\""}}}}]}'
+
+# =========================================================
+# VERCEL DEPLOYMENT PROTOCOL (optional custom hosting)
+# TARGET: silverbackai.agency -> AI Studio redirect
+# AI Studio: https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137
 # =========================================================
 
 # 1. AUTHENTICATE & LINK
