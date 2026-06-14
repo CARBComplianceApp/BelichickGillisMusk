@@ -149,7 +149,7 @@ const Dashboard: React.FC = () => {
             </ResponsiveContainer>
           </div>
           <div className="mt-4 p-3 bg-amber-900/10 border border-amber-900/30 rounded text-xs text-amber-200 font-mono">
-            WARNING: Q4 depreciation targets require 2 more asset acquisitions >6000lbs.
+            WARNING: Q4 depreciation targets require 2 more asset acquisitions {'>'}6000lbs.
           </div>
         </div>
       </div>
