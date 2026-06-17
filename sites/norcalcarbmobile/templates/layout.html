@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{canonical}}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{root}}css/styles.css">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:site_name" content="NorCal CARB Mobile">
+  <meta name="twitter:card" content="summary_large_image">
+  {{schema}}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{{root}}" class="logo">NORCAL <span>CARB</span> MOBILE</a>
+      <nav class="nav" aria-label="Main navigation">
+        {{nav}}
+      </nav>
+      <a href="tel:{{phoneRaw}}" class="btn btn-primary" style="padding: 0.625rem 1rem; font-size: 0.8125rem;">{{phone}}</a>
+    </div>
+  </header>
+
+  <main>
+    {{content}}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>NorCal CARB Mobile</h4>
+          <p>Mobile CARB Clean Truck Check testing across Northern California, the Central Valley, and San Diego County. Veteran-managed. {{reviewCount}}+ five-star reviews.</p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <p><a href="{{root}}services/clean-truck-check/">Clean Truck Check (OBD)</a></p>
+          <p><a href="{{root}}services/smoke-opacity-test/">Smoke Opacity (J1667)</a></p>
+          <p><a href="{{root}}services/motorhome-testing/">Motorhome Testing</a></p>
+          <p><a href="{{root}}rates/">Rates &amp; Pricing</a></p>
+        </div>
+        <div>
+          <h4>Service Areas</h4>
+          <p><a href="{{root}}service-area/sacramento/">Sacramento</a></p>
+          <p><a href="{{root}}service-area/oakland/">East Bay</a></p>
+          <p><a href="{{root}}service-area/fresno/">Fresno</a></p>
+          <p><a href="{{root}}service-area/">All Areas</a></p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p><a href="tel:{{phoneRaw}}">{{phone}}</a></p>
+          <p><a href="{{root}}contact/">Book Online</a></p>
+          <p><a href="{{social.facebook}}">Facebook</a></p>
+          <p><a href="{{social.instagram}}">Instagram</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; {{year}} NorCal CARB Mobile. All rights reserved. CARB credentialed HD I/M testing provider.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

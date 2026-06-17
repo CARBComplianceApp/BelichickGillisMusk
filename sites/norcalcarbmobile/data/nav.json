@@ -1,0 +1,7 @@
+[
+  { "label": "Services", "href": "/services/" },
+  { "label": "Service Areas", "href": "/service-area/" },
+  { "label": "Blog", "href": "/blog/" },
+  { "label": "Rates", "href": "/rates/" },
+  { "label": "Contact", "href": "/contact/" }
+]
