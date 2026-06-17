@@ -6,7 +6,26 @@ export enum ViewState {
   ASSET_ANALYZER = 'ASSET_ANALYZER',
   MAPS_GROUNDING = 'MAPS_GROUNDING',
   DOCUMENTS = 'DOCUMENTS',
-  LEAD_DATABASE = 'LEAD_DATABASE'
+  LEAD_DATABASE = 'LEAD_DATABASE',
+  SITE_MIGRATION = 'SITE_MIGRATION'
+}
+
+export type MigrationStatus = 'LIVE' | 'SISTER' | 'GAP' | 'PLANNED' | 'REDIRECT';
+
+export interface MigrationPage {
+  path: string;
+  title: string;
+  status: MigrationStatus;
+  notes?: string;
+  priority?: 'P0' | 'P1' | 'P2';
+}
+
+export interface MigrationDomain {
+  domain: string;
+  label: string;
+  role: 'PRIMARY' | 'SISTER' | 'TARGET';
+  description: string;
+  pages: MigrationPage[];
 }
 
 export interface ChatMessage {
