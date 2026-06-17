@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts"
+    "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts",
+    "contacts:export": "tsx scripts/export-uniform-contacts.ts --in exports/contacts-seed.json --enrich"
   },
   "dependencies": {
     "react": "^19.2.4",
