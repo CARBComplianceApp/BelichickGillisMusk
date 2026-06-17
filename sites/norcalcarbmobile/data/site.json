@@ -1,0 +1,21 @@
+{
+  "name": "NorCal CARB Mobile",
+  "domain": "https://norcalcarbmobile.com",
+  "phone": "916-890-4427",
+  "phoneAlt": "415-900-8563",
+  "sms": "617-359-6953",
+  "email": "bryan@norcalcarbmobile.com",
+  "bookingUrl": "https://cal.com/norcalcarbmobile",
+  "reviewCount": 150,
+  "prices": {
+    "obd": 75,
+    "smoke": 250,
+    "motorhome": 300
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/carbcleantruckcheck/",
+    "instagram": "https://www.instagram.com/carb.mobiletruckcheck/",
+    "x": "https://x.com/carbcleantruck",
+    "youtube": "https://www.youtube.com/@CARBCLEANTRUCKMOBILE"
+  }
+}

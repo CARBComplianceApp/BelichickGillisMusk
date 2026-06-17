@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:norcal": "node sites/norcalcarbmobile/build.mjs",
     "preview": "vite preview",
     "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts"
   },

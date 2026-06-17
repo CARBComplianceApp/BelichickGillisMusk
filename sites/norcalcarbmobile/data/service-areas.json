@@ -1,0 +1,154 @@
+[
+  {
+    "slug": "sacramento",
+    "name": "Sacramento",
+    "phase": 1,
+    "title": "Sacramento Mobile Clean Truck Check | CARB HD I/M Testing",
+    "description": "On-site CARB Clean Truck Check testing in Sacramento County. OBD $75, J1667 smoke opacity $250. We come to your fleet yard, job site, or warehouse.",
+    "headline": "Sacramento CARB Mobile Clean Truck Check",
+    "subheadline": "Mobile OBD & OVI Smoke Opacity Testing — Sacramento County & Surrounding Areas",
+    "intro": "NorCal CARB Mobile is Sacramento's trusted provider for on-site Clean Truck Check testing. We bring certified CARB HD I/M compliance testing directly to your fleet location, job site, or business anywhere in Sacramento County.",
+    "industries": [
+      "Trucking & Logistics along I-5, I-80, and Highway 99",
+      "Construction fleets in Elk Grove, Natomas, Folsom, and Rancho Cordova",
+      "Government & municipal fleets including SMUD and regional transit",
+      "Agricultural operations in Galt, Herald, Wilton, and Sloughhouse"
+    ],
+    "cities": ["Sacramento", "Elk Grove", "Rancho Cordova", "Folsom", "Citrus Heights", "West Sacramento", "North Highlands", "Antelope", "Galt"],
+    "geo": { "lat": 38.5816, "lng": -121.4944 },
+    "smsKeyword": "SACRAMENTO"
+  },
+  {
+    "slug": "oakland",
+    "name": "Oakland & East Bay",
+    "phase": 1,
+    "title": "East Bay Mobile CARB Testing | Oakland Clean Truck Check",
+    "description": "J1667 smoke opacity and OBD Clean Truck Check testing for East Bay fleets. Mobile service in Oakland, Hayward, Fremont, and surrounding areas.",
+    "headline": "East Bay Mobile CARB Clean Truck Check",
+    "subheadline": "Oakland, Hayward, Fremont & Alameda County Fleet Testing",
+    "intro": "Keep your East Bay fleet compliant without fighting bridge traffic or waiting at fixed testing stations. NorCal CARB Mobile brings certified HD I/M testing to your Oakland yard, Port of Oakland logistics hub, or Hayward warehouse.",
+    "industries": [
+      "Port of Oakland drayage and container logistics",
+      "East Bay distribution centers and last-mile fleets",
+      "Construction and heavy equipment rental yards",
+      "Municipal and transit diesel fleets"
+    ],
+    "cities": ["Oakland", "Hayward", "Fremont", "Berkeley", "San Leandro", "Alameda", "Union City", "Richmond"],
+    "geo": { "lat": 37.8044, "lng": -122.2712 },
+    "smsKeyword": "EASTBAY"
+  },
+  {
+    "slug": "butte-county",
+    "name": "Butte County",
+    "phase": 1,
+    "title": "Butte County Mobile Clean Truck Check | Chico & Oroville",
+    "description": "Mobile CARB Clean Truck Check testing in Butte County. Serving Chico, Oroville, Paradise, and rural Northern California fleets.",
+    "headline": "Butte County Mobile Clean Truck Check",
+    "subheadline": "On-Site CARB Testing for Chico, Oroville & Rural NorCal Fleets",
+    "intro": "Butte County fleets face unique compliance challenges — older diesel equipment, rural locations, and limited access to fixed testing stations. NorCal CARB Mobile brings J1667 smoke opacity and OBD testing directly to your operation.",
+    "industries": [
+      "Agricultural and timber hauling operations",
+      "CAL FIRE and emergency response vehicle fleets",
+      "Rural construction and grading contractors",
+      "Princeton Unified School District and institutional fleets"
+    ],
+    "cities": ["Chico", "Oroville", "Paradise", "Gridley", "Biggs", "Durham"],
+    "geo": { "lat": 39.7285, "lng": -121.8375 },
+    "smsKeyword": "BUTTE"
+  },
+  {
+    "slug": "fairfield",
+    "name": "Fairfield & Solano County",
+    "phase": 1,
+    "title": "Fairfield Mobile Clean Truck Check | Solano County CARB Testing",
+    "description": "Mobile CARB testing in Fairfield, Vacaville, and Solano County. OBD and J1667 smoke opacity testing at your location.",
+    "headline": "Fairfield & Solano County Mobile CARB Testing",
+    "subheadline": "Clean Truck Check for I-80 Corridor Fleets",
+    "intro": "Solano County sits on the critical I-80 freight corridor between Sacramento and the Bay Area. NorCal CARB Mobile provides on-site compliance testing for Fairfield, Vacaville, and Vallejo fleets without disrupting your schedule.",
+    "industries": [
+      "I-80 corridor trucking and logistics",
+      "Travis AFB area commercial fleets",
+      "Solano County municipal and utility vehicles",
+      "Agricultural hauling in the Suisun Valley"
+    ],
+    "cities": ["Fairfield", "Vacaville", "Vallejo", "Suisun City", "Benicia", "Dixon"],
+    "geo": { "lat": 38.2494, "lng": -122.0400 },
+    "smsKeyword": "FAIRFIELD"
+  },
+  {
+    "slug": "fresno",
+    "name": "Fresno",
+    "phase": 2,
+    "title": "Fresno Mobile Clean Truck Check | Central Valley CARB Testing",
+    "description": "Agricultural vehicle testing and fleet depot mobile CARB service in Fresno and the Central Valley. OBD $75, smoke opacity $250.",
+    "headline": "Fresno & Central Valley Mobile CARB Testing",
+    "subheadline": "Agricultural Vehicle Testing & Fleet Depot Mobile Service",
+    "intro": "The Central Valley is California's agricultural and logistics backbone. NorCal CARB Mobile now serves Fresno County with specialized agricultural vehicle testing and fleet depot mobile service — keeping your equipment compliant without leaving the field.",
+    "industries": [
+      "Agricultural vehicle and harvest equipment fleets",
+      "Central Valley distribution and cold-chain logistics",
+      "Dairy and livestock hauling operations",
+      "Highway 99 corridor freight carriers"
+    ],
+    "cities": ["Fresno", "Clovis", "Selma", "Reedley", "Sanger", "Kerman"],
+    "geo": { "lat": 36.7378, "lng": -119.7871 },
+    "smsKeyword": "FRESNO"
+  },
+  {
+    "slug": "stockton",
+    "name": "Stockton & San Joaquin County",
+    "phase": 2,
+    "title": "Stockton Mobile Clean Truck Check | San Joaquin County",
+    "description": "On-site CARB emissions testing for Stockton and San Joaquin County fleets. Mobile OBD and J1667 smoke opacity testing.",
+    "headline": "Stockton & San Joaquin County Mobile CARB Testing",
+    "subheadline": "Fleet Depot Mobile Service for the Central Valley Corridor",
+    "intro": "Stockton's position at the junction of I-5 and Highway 99 makes it a critical hub for Central Valley freight. NorCal CARB Mobile provides on-site Clean Truck Check testing for distribution centers, port-related trucking, and agricultural fleets throughout San Joaquin County.",
+    "industries": [
+      "Port of Stockton and inland waterway logistics",
+      "Agricultural hauling and food processing fleets",
+      "Distribution warehouses along I-5 and Highway 99",
+      "Construction and heavy equipment contractors"
+    ],
+    "cities": ["Stockton", "Tracy", "Lodi", "Manteca", "Ripon", "Escalon"],
+    "geo": { "lat": 37.9577, "lng": -121.2908 },
+    "smsKeyword": "STOCKTON"
+  },
+  {
+    "slug": "san-diego",
+    "name": "San Diego County",
+    "phase": 3,
+    "title": "San Diego Mobile Clean Truck Check | Port & Fleet CARB Testing",
+    "description": "Rapid-response mobile CARB testing for San Diego County commercial fleets. Port compliance, fleet depot service, and J1667 smoke opacity testing.",
+    "headline": "San Diego County Mobile CARB Testing",
+    "subheadline": "Port Compliance & Fleet Depot Mobile Service",
+    "intro": "San Diego's dense concentration of commercial fleets and port-related trucking demands fast, reliable compliance testing. NorCal CARB Mobile brings rapid-response mobile testing to your San Diego yard — test large fleets without disrupting tight schedules.",
+    "industries": [
+      "Port of San Diego and border-crossing logistics",
+      "Military contractor and defense-related fleets",
+      "Construction and infrastructure project vehicles",
+      "Regional distribution and last-mile delivery"
+    ],
+    "cities": ["San Diego", "Chula Vista", "Oceanside", "Escondido", "El Cajon", "Carlsbad"],
+    "geo": { "lat": 32.7157, "lng": -117.1611 },
+    "smsKeyword": "SANDIEGO"
+  },
+  {
+    "slug": "san-jose",
+    "name": "San Jose & South Bay",
+    "phase": 1,
+    "title": "San Jose Mobile CARB Testing | South Bay Clean Truck Check",
+    "description": "Mobile Clean Truck Check testing in San Jose, Santa Clara, and the South Bay. OBD and smoke opacity testing at your location.",
+    "headline": "San Jose & South Bay Mobile CARB Testing",
+    "subheadline": "Silicon Valley Fleet Compliance — We Come to You",
+    "intro": "South Bay fleets operate in one of the most congested corridors in California. NorCal CARB Mobile eliminates testing station trips by bringing certified HD I/M testing to your San Jose yard, Santa Clara warehouse, or job site.",
+    "industries": [
+      "Silicon Valley logistics and data center construction",
+      "South Bay municipal and utility fleets",
+      "Food distribution and cold-chain operations",
+      "Heavy equipment and rental fleet operators"
+    ],
+    "cities": ["San Jose", "Santa Clara", "Sunnyvale", "Milpitas", "Campbell", "Gilroy"],
+    "geo": { "lat": 37.3382, "lng": -121.8863 },
+    "smsKeyword": "SOUTH BAY"
+  }
+]
