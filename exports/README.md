@@ -31,6 +31,31 @@ GOOGLE_PLACES_API_KEY=your_key npx tsx scripts/export-uniform-contacts.ts \
   --out exports/contacts
 ```
 
+## Google Drive contact lists (weird labels like `OVI 250 ANITOCH`)
+
+Scans these folders when credentials are set:
+
+| Folder | Drive ID |
+|--------|----------|
+| RAW_UPLOADS | `1lO0xjCn3hnCubFFVnuNPQ8c0Y8lGt_bg` |
+| OUTPUT | `1BNfRFl3EH4cL61UEDBVCEyXgC6F1-oQO` |
+| CLAUDE_INBOX | `16mCOT2phrIwclsr3NGufopyIcp4Kyb8t` |
+
+Labels like **OVI 250 ANITOCH** (test type + price + city, no name) are normalized to:
+`Antioch — OVI $250 (needs name)` with notes preserving the raw label.
+
+**Live Drive pull** (needs `GOOGLE_SERVICE_ACCOUNT_KEY` + `GOOGLE_IMPERSONATE_USER`):
+
+```bash
+npm run contacts:drive:live
+```
+
+**Offline test** with sample messy files:
+
+```bash
+npm run contacts:drive
+```
+
 Each contact gets a **CRM row link** like:
 `https://docs.google.com/spreadsheets/d/.../edit#gid=0&range=A{row}`
 

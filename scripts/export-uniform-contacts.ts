@@ -138,7 +138,11 @@ function crmUrlForRow(row?: number, company?: string): string {
 
 function buildContact(partial: Partial<UniformContact> & { phone?: string; company?: string }): UniformContact | null {
   const digits = partial.phone ? normalizePhone(partial.phone) : null;
-  const company = titleCase(partial.company || '');
+  const companyRaw = partial.company || '';
+  const company =
+    companyRaw.includes('(needs name)') || companyRaw.includes(' — OVI') || companyRaw.includes(' — OBD')
+      ? companyRaw.trim()
+      : titleCase(companyRaw);
   const contactName = titleCase(partial.contactName || '');
   const displayCompany = company || contactName;
   if (!displayCompany) return null;
@@ -207,15 +211,21 @@ function parseMasterCrmCsv(filePath: string): UniformContact[] {
 }
 
 function parseSeedJson(filePath: string): UniformContact[] {
-  const raw = JSON.parse(fs.readFileSync(filePath, 'utf8')) as Array<Partial<UniformContact> & { phone?: string }>;
-  return raw.map((r, i) =>
-    buildContact({
-      ...r,
-      crmRow: r.crmRow ?? i + 2,
-      crmUrl: r.crmUrl || crmUrlForRow(r.crmRow ?? i + 2, r.company),
-      source: r.source || 'seed',
-    })
-  ).filter((c): c is UniformContact => c !== null);
+  const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const rows = Array.isArray(parsed) ? parsed : parsed.contacts;
+  if (!Array.isArray(rows)) {
+    throw new Error('JSON must be an array or { contacts: [...] }');
+  }
+  return rows
+    .map((r: Partial<UniformContact> & { phone?: string }, i: number) =>
+      buildContact({
+        ...r,
+        crmRow: r.crmRow ?? i + 2,
+        crmUrl: r.crmUrl || crmUrlForRow(r.crmRow ?? i + 2, r.company),
+        source: r.source || 'import',
+      })
+    )
+    .filter((c): c is UniformContact => c !== null);
 }
 
 function dedupe(contacts: UniformContact[]): UniformContact[] {

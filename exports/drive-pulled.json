@@ -1,0 +1,141 @@
+{
+  "scanned": [
+    "local:exports/drive-samples"
+  ],
+  "count": 11,
+  "weirdCount": 8,
+  "contacts": [
+    {
+      "company": "Antioch — OVI $250 (needs name)",
+      "contactName": "",
+      "phone": "",
+      "email": "",
+      "city": "Antioch",
+      "state": "CA",
+      "notes": "Raw label: OVI 250 ANITIOCH · Test: OVI · Price: $250 · Area: Antioch | Raw label: OVI 250 antioch · Test: OVI · Price: $250 · Area: Antioch",
+      "source": "local:calendar-lines.txt+local:messy-contacts.csv",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": true
+    },
+    {
+      "company": "Fairfield — HD-OBD (needs name)",
+      "contactName": "Carlos Mendez",
+      "phone": "7075558899",
+      "email": "",
+      "city": "Fairfield",
+      "state": "CA",
+      "notes": "Raw label: HD-OBD FAIRFIELD - Carlos Mendez · Test: HD-OBD · Area: Fairfield",
+      "source": "local:messy-contacts.csv",
+      "driveFileName": "messy-contacts.csv",
+      "isWeird": true
+    },
+    {
+      "company": "Hayward — SMOKE $219 (needs name)",
+      "contactName": "",
+      "phone": "",
+      "email": "",
+      "city": "Hayward",
+      "state": "CA",
+      "notes": "Raw label: Smoke OVI 219 Hayward · Test: SMOKE · Price: $219 · Area: Hayward",
+      "source": "local:calendar-lines.txt",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": true
+    },
+    {
+      "company": "Jeanne",
+      "contactName": "B&m Builders",
+      "phone": "5105554412",
+      "email": "",
+      "city": "",
+      "state": "CA",
+      "notes": "",
+      "source": "local:calendar-lines.txt",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": false
+    },
+    {
+      "company": "Mike Sousa Jmb Construction",
+      "contactName": "",
+      "phone": "9165553301",
+      "email": "",
+      "city": "",
+      "state": "CA",
+      "notes": "Known fleet",
+      "source": "local:messy-contacts.csv",
+      "driveFileName": "messy-contacts.csv",
+      "isWeird": false
+    },
+    {
+      "company": "OVI (needs name)",
+      "contactName": "",
+      "phone": "",
+      "email": "",
+      "city": "",
+      "state": "CA",
+      "notes": "Raw label: OVI · Test: OVI",
+      "source": "local:calendar-lines.txt",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": true
+    },
+    {
+      "company": "OVI $250 (needs name)",
+      "contactName": "",
+      "phone": "9255550142",
+      "email": "",
+      "city": "",
+      "state": "CA",
+      "notes": "Calendar import — no company on event · Raw label: OVI 250 ANITOCH · Test: OVI · Price: $250",
+      "source": "local:messy-contacts.csv",
+      "driveFileName": "messy-contacts.csv",
+      "isWeird": true
+    },
+    {
+      "company": "Pacific Fleet Llc (",
+      "contactName": "",
+      "phone": "4155559988",
+      "email": "",
+      "city": "",
+      "state": "CA",
+      "notes": "",
+      "source": "local:calendar-lines.txt",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": false
+    },
+    {
+      "company": "San Diego — OBD $119 (needs name)",
+      "contactName": "",
+      "phone": "",
+      "email": "",
+      "city": "San Diego",
+      "state": "CA",
+      "notes": "Paid stripe — name missing · Raw label: OBD 119 SAN DIEGO · Test: OBD · Price: $119 · Area: San Diego",
+      "source": "local:messy-contacts.csv",
+      "driveFileName": "messy-contacts.csv",
+      "isWeird": true
+    },
+    {
+      "company": "Stockton — OBD $75 (needs name)",
+      "contactName": "",
+      "phone": "",
+      "email": "",
+      "city": "Stockton",
+      "state": "CA",
+      "notes": "Raw label: OBD 75 STOCKTON · Test: OBD · Price: $75 · Area: Stockton",
+      "source": "local:calendar-lines.txt",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": true
+    },
+    {
+      "company": "Tracy — FLEET $169 (needs name)",
+      "contactName": "",
+      "phone": "2095552200",
+      "email": "",
+      "city": "Tracy",
+      "state": "CA",
+      "notes": "5 trucks · Raw label: Fleet OVI 169 Tracy · Test: FLEET · Price: $169 · Area: Tracy",
+      "source": "local:messy-contacts.csv",
+      "driveFileName": "messy-contacts.csv",
+      "isWeird": true
+    }
+  ]
+}
