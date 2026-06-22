@@ -30,6 +30,9 @@ import { MigrationDomain, MigrationPage, MigrationStatus } from '../types';
 
 const PRIMARY_DOMAIN = 'norcalcarbmobile.com';
 
+/** Canonical Stockton sister-site URL — use everywhere, not cleantruckcheckstockton.com */
+export const STOCKTON_SISTER_URL = 'https://carbteststockton.com';
+
 const domains: MigrationDomain[] = [
   {
     domain: 'norcalcarbmobile.com',
@@ -46,7 +49,13 @@ const domains: MigrationDomain[] = [
       { path: '/clean-truck-check-rates', title: 'CARB Clean Truck Check Rates', status: 'LIVE', priority: 'P0' },
       { path: '/what-is-clean-truck-check', title: 'What Is Clean Truck Check? (HD I/M Explainer)', status: 'LIVE', priority: 'P0' },
       { path: '/service-area-sacramento-carb-testing', title: 'Service Area — Sacramento', status: 'LIVE', priority: 'P0' },
-      { path: '/service-area-san-joaquin-county-mobile-testing', title: 'Service Area — Stockton / San Joaquin County', status: 'LIVE', priority: 'P0' },
+      {
+        path: '/service-area-san-joaquin-county-mobile-testing',
+        title: 'Service Area — Stockton / San Joaquin County',
+        status: 'LIVE',
+        priority: 'P0',
+        notes: `Primary-site Stockton page. Sister landing: ${STOCKTON_SISTER_URL}`,
+      },
       { path: '/service-area-butte-county-clean-truck-check', title: 'Service Area — Butte County (Chico / Oroville / Paradise)', status: 'LIVE', priority: 'P1' },
       { path: '/east-bay-mobile-carb-testing', title: 'Service Area — East Bay (Oakland / Berkeley / Fremont)', status: 'LIVE', priority: 'P0' },
       { path: '/san-jose-mobile-carb-testing', title: 'Service Area — San Jose / South Bay', status: 'LIVE', priority: 'P0' },
@@ -187,21 +196,19 @@ const domains: MigrationDomain[] = [
     ],
   },
   {
-    domain: 'cleantruckcheckstockton.com',
-    label: 'Sister — Stockton (referenced)',
-    role: 'SISTER',
-    description: 'Referenced in hub copy. Live regional site appears to be carbteststockton.com — reconcile.',
-    pages: [
-      { path: '/', title: 'Stockton landing (REFERENCED — verify it resolves)', status: 'GAP', priority: 'P1', notes: 'Hub links to this domain; confirm DNS + content vs. carbteststockton.com.' },
-    ],
-  },
-  {
     domain: 'carbteststockton.com',
-    label: 'Sister — Stockton (live)',
+    label: 'Sister — Stockton / Central Valley (canonical)',
     role: 'SISTER',
-    description: 'Active Stockton / Central Valley site. "Stockton Special" $40/truck fleet promo lives here.',
+    description:
+      'Canonical Stockton URL. Active regional site with "Stockton Special" $40/truck fleet promo. Use carbteststockton.com everywhere — not cleantruckcheckstockton.com.',
     pages: [
-      { path: '/', title: 'Mobile CARB Diesel Testing — Stockton & Central Valley', status: 'SISTER', priority: 'P0' },
+      {
+        path: '/',
+        title: 'Mobile CARB Diesel Testing — Stockton & Central Valley',
+        status: 'SISTER',
+        priority: 'P0',
+        notes: 'If carb-clean-truck-check.com hub or legacy copy links to cleantruckcheckstockton.com, 301 redirect that domain here.',
+      },
     ],
   },
   {
@@ -224,7 +231,20 @@ const domains: MigrationDomain[] = [
       { path: '/carb', title: 'NorCal CARB Mobile (product line landing)', status: 'PLANNED', priority: 'P0' },
       { path: '/carb/book', title: 'CARB — Unified booking funnel', status: 'PLANNED', priority: 'P0' },
       { path: '/carb/fleet', title: 'CARB — Fleet / Volume program', status: 'PLANNED', priority: 'P0' },
-      { path: '/carb/areas/*', title: 'CARB — Per-area landers (Sac, Stockton, Fairfield, Roseville, EastBay, San Jose, SD, Napa, SF, Fresno)', status: 'PLANNED', priority: 'P0', notes: 'Generated from gap list above.' },
+      {
+        path: '/carb/areas/stockton',
+        title: 'CARB — Stockton / San Joaquin County area landing',
+        status: 'PLANNED',
+        priority: 'P0',
+        notes: `Mirror content from sister site ${STOCKTON_SISTER_URL}. Canonical external URL stays carbteststockton.com until cutover.`,
+      },
+      {
+        path: '/carb/areas/*',
+        title: 'CARB — Other per-area landers (Sac, Fairfield, Roseville, EastBay, San Jose, SD, Napa, SF, Fresno)',
+        status: 'PLANNED',
+        priority: 'P0',
+        notes: 'Stockton uses carbteststockton.com as the live sister URL today.',
+      },
       { path: '/intel', title: 'GIA Intel / Silent Partner dashboard entry', status: 'PLANNED', priority: 'P1' },
     ],
   },
