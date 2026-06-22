@@ -9,6 +9,7 @@ import CreativeLab from './components/CreativeLab';
 import MapsSearch from './components/MapsSearch';
 import LeadDatabase from './components/LeadDatabase';
 import SiteMigration from './components/SiteMigration';
+import NorcalProgress from './components/NorcalProgress';
 import { ViewState } from './types';
 
 const App: React.FC = () => {
@@ -32,6 +33,8 @@ const App: React.FC = () => {
         return <MapsSearch />;
       case ViewState.SITE_MIGRATION:
         return <SiteMigration />;
+      case ViewState.NORCAL_PROGRESS:
+        return <NorcalProgress />;
       case ViewState.DOCUMENTS:
         return <DeploymentConsole />;
       default:
