@@ -8,7 +8,8 @@
     "build": "vite build",
     "build:norcal": "node sites/norcalcarbmobile/build.mjs",
     "preview": "vite preview",
-    "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts"
+    "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts",
+    "retest:merge": "tsx scripts/merge-jan-feb-retest-leads.ts"
   },
   "dependencies": {
     "react": "^19.2.4",
