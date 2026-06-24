@@ -1,0 +1,9 @@
+{
+  "name": "norcalcarbmobile-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "npx serve dist -l 4321"
+  }
+}

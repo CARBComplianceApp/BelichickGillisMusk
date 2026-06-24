@@ -4,6 +4,7 @@ import GIAWebsite from './GIAWebsite';
 
 const DeploymentConsole: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'INTEL' | 'TERMINAL' | 'PREVIEW' | 'PROTOCOLS' | 'MAKE'>('INTEL');
+  const [terminalScript, setTerminalScript] = useState<'vercel' | 'cloudflare'>('vercel');
   const [copied, setCopied] = useState(false);
 
   const assets = [
@@ -12,7 +13,7 @@ const DeploymentConsole: React.FC = () => {
     { name: 'Make Automation (GIA)', status: 'LEGACY_DETECTED', color: 'text-mil-danger', desc: 'The Backend. Lead syncing & CRM automation via Make.com. REQUIRES PURGE.' },
     { name: 'Silverback AI App (AI Studio)', status: 'ACTIVE', color: 'text-emerald-500', desc: 'CARBComplianceApp/Silverback-Ai-App on main. Live at aistudio.google.com.' },
     { name: 'silverbackai.agency', status: 'REDIRECT_PENDING', color: 'text-amber-500', desc: 'DNS on Cloudflare. Redirect to AI Studio app preview URL.' },
-    { name: 'NorCal CARB Mobile', status: 'ACTIVE', color: 'text-emerald-500', desc: 'Mobile CARB Compliance project: clean-truck.' },
+    { name: 'NorCal CARB Mobile (Cloudflare)', status: 'STAGED', color: 'text-amber-400', desc: 'Squarespace → Cloudflare Pages migration. 27 pages, 47×301 redirects, consolidated /blog/.' },
     { name: 'cleantruckcheckfairfield.com', status: 'LIVE', color: 'text-emerald-500', desc: 'DNS active on Cloudflare. Mapping to operational funnel.' },
   ];
 
@@ -47,13 +48,49 @@ vercel login
 vercel link --project gia-website-2026-02-13
 
 # 2. CONFIGURE ENVIRONMENT VARIABLES
-vercel env add API_KEY production
+vercel env add GEMINI_API_KEY production
+vercel env add GOOGLE_SERVICE_ACCOUNT_KEY production
+vercel env add GOOGLE_IMPERSONATE_USER production "bryan@norcalcarbmobile.com"
+# OR for OAuth instead of service account:
+# vercel env add GOOGLE_CLIENT_ID production
+# vercel env add GOOGLE_CLIENT_SECRET production
+# vercel env add GOOGLE_REFRESH_TOKEN production
 vercel env add MILA_AGENT_ID production "mila-v2-09"
 vercel env add KESHA_VOICE_SECRET production "encrypted_voice_k_99"
 vercel env add NODE_ENV production
 
 # 3. DEPLOY FRONTEND APPLICATION
 vercel --prod --confirm
+`;
+
+  const cloudflareScript = `
+# =========================================================
+# CLOUDFLARE PAGES DEPLOYMENT: norcalcarbmobile.com
+# MIGRATION: Squarespace → Static Cloudflare Pages
+# =========================================================
+
+# 1. BUILD STATIC SITE
+cd sites/norcalcarbmobile
+npm run build
+# Output: sites/norcalcarbmobile/dist/ (27 pages, 47×301 redirects)
+
+# 2. CLOUDFLARE PAGES (via dashboard or wrangler)
+# Dashboard: Connect repo → Build command: cd sites/norcalcarbmobile && npm run build
+#            Output directory: sites/norcalcarbmobile/dist
+# Custom domain: norcalcarbmobile.com
+
+# 3. PRE-CUTOVER: VERIFY REDIRECTS ON STAGING
+curl -I https://<preview>.pages.dev/service-area-sacramento-carb-testing
+# Expect: 301 → /service-area/sacramento/
+
+# 4. DNS CUTOVER (when ready)
+# Point norcalcarbmobile.com CNAME to <project>.pages.dev
+# Remove Squarespace DNS records
+
+# 5. POST-MIGRATION
+# - Submit sitemap.xml to Google Search Console
+# - Configure SPF/DKIM/DMARC for bryan@norcalcarbmobile.com
+# - Monitor 404s for 30 days
 `;
 
   const makeProtocol = `
@@ -148,7 +185,7 @@ vercel --prod --confirm
                         <p className="text-zinc-500 text-sm">{asset.desc}</p>
                         <div className="mt-4 pt-4 border-t border-zinc-800">
                              <button 
-                                onClick={() => asset.name.includes('Make') ? setActiveTab('MAKE') : setActiveTab('TERMINAL')}
+                                onClick={() => asset.name.includes('Make') ? setActiveTab('MAKE') : asset.name.includes('Cloudflare') ? (setTerminalScript('cloudflare'), setActiveTab('TERMINAL')) : setActiveTab('TERMINAL')}
                                 className={`w-full py-2 ${asset.color === 'text-mil-danger' ? 'bg-red-900/20 text-red-500 border-red-900/50' : 'bg-zinc-800 text-white border-zinc-700'} border rounded text-xs font-bold uppercase hover:opacity-80 flex items-center justify-center gap-2`}
                             >
                                 {asset.color === 'text-mil-danger' ? <Trash2 size={14} /> : <Play size={14} />}
@@ -162,6 +199,10 @@ vercel --prod --confirm
 
         {activeTab === 'TERMINAL' && (
             <div className="h-full flex flex-col p-8 animate-fade-in">
+                <div className="flex gap-2 mb-4 max-w-4xl mx-auto w-full">
+                    <button onClick={() => setTerminalScript('vercel')} className={`px-3 py-1.5 rounded text-xs font-bold ${terminalScript === 'vercel' ? 'bg-zinc-800 text-mil-accent' : 'text-zinc-500'}`}>Vercel (GIA)</button>
+                    <button onClick={() => setTerminalScript('cloudflare')} className={`px-3 py-1.5 rounded text-xs font-bold ${terminalScript === 'cloudflare' ? 'bg-zinc-800 text-amber-400' : 'text-zinc-500'}`}>Cloudflare (NorCal)</button>
+                </div>
                 <div className="bg-[#1e1e1e] border border-zinc-700 rounded-lg overflow-hidden flex flex-col max-w-4xl mx-auto w-full shadow-2xl">
                     <div className="bg-[#2d2d2d] px-4 py-2 flex items-center justify-between border-b border-black/50">
                         <div className="flex gap-2">
@@ -169,13 +210,13 @@ vercel --prod --confirm
                             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                             <div className="w-3 h-3 rounded-full bg-green-500"></div>
                         </div>
-                        <div className="text-zinc-400 text-xs font-mono">silverback@terminal:~/vercel</div>
-                        <button onClick={() => copyToClipboard(deploymentScript)} className="text-zinc-400 hover:text-white transition-colors">
+                        <div className="text-zinc-400 text-xs font-mono">{terminalScript === 'vercel' ? 'silverback@terminal:~/vercel' : 'silverback@terminal:~/cloudflare'}</div>
+                        <button onClick={() => copyToClipboard(terminalScript === 'vercel' ? deploymentScript : cloudflareScript)} className="text-zinc-400 hover:text-white transition-colors">
                             {copied ? <Check size={14} /> : <Copy size={14} />}
                         </button>
                     </div>
                     <div className="p-6 font-mono text-sm overflow-y-auto text-emerald-400 max-h-[500px]">
-                        <pre className="whitespace-pre-wrap">{deploymentScript}</pre>
+                        <pre className="whitespace-pre-wrap">{terminalScript === 'vercel' ? deploymentScript : cloudflareScript}</pre>
                     </div>
                 </div>
             </div>

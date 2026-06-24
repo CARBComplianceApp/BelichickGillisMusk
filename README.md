@@ -17,6 +17,11 @@ Production domain: https://silverbackai.agency (redirects to AI Studio)
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Copy `.env.example` to `.env.local` and set:
+   - `GEMINI_API_KEY` — Gemini API key for Mila/Kesha AI features
+   - Gmail credentials (see [AGENTS.md](AGENTS.md)) if using `/api/gmail/send`
 3. Run the app:
    `npm run dev`
+4. Deploy API + frontend to Vercel:
+   `vercel --prod`
+   Check Gmail status: `GET /api/health`
