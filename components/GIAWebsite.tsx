@@ -13,7 +13,7 @@ const GIAWebsite: React.FC = () => {
       { property: 'og:title', content: 'Gillis Intelligence Agency | The Silent Partner' },
       { property: 'og:description', content: 'We don\'t sell software. We sell profit. Upgrade your business with military-grade operational AI.' },
       { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: 'https://gillis.agency' },
+      { property: 'og:url', content: 'https://silverbackai.agency' },
       { property: 'og:image', content: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80' }, // High-tech dashboard/data image
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: 'Gillis Intelligence Agency | The Silent Partner' },
