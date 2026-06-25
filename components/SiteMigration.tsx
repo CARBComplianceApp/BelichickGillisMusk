@@ -11,12 +11,15 @@ import {
   Check,
   Filter,
 } from 'lucide-react';
-import { MigrationDomain, MigrationPage, MigrationStatus } from '../types';
+import { MigrationPage, MigrationStatus } from '../types';
+import { domains, PRIMARY_DOMAIN } from '../data/migration';
 
 /**
  * Site Migration Tracker
  *
- * Single source of truth for the NorCal CARB Mobile → Silverback / GIA migration.
+ * URL-level view of the NorCal CARB Mobile → Silverback / GIA migration.
+ * Data lives in `data/migration.ts` so the NorCal Progress dashboard
+ * stays in sync. Update statuses there.
  *
  * - PRIMARY: pages we know exist on norcalcarbmobile.com today
  * - SISTER:  pages on the satellite / sister-site network
@@ -24,231 +27,7 @@ import { MigrationDomain, MigrationPage, MigrationStatus } from '../types';
  *            but that DO NOT yet have a page on norcalcarbmobile.com — must be built
  * - PLANNED: new pages targeted for the migration that don't exist anywhere yet
  * - REDIRECT: pages that exist on the old site and need 301s on the new domain
- *
- * Update this catalog as pages get built, crawled, or retired.
  */
-
-const PRIMARY_DOMAIN = 'norcalcarbmobile.com';
-
-/** Canonical Stockton sister-site URL — use everywhere, not cleantruckcheckstockton.com */
-export const STOCKTON_SISTER_URL = 'https://carbteststockton.com';
-
-const domains: MigrationDomain[] = [
-  {
-    domain: 'norcalcarbmobile.com',
-    label: 'NorCal CARB Mobile (Primary)',
-    role: 'PRIMARY',
-    description:
-      'Current production site. All "LIVE" pages are confirmed indexed. "GAP" pages are advertised in nav/hero/sister-site copy but currently 404 or missing.',
-    pages: [
-      // ---- LIVE on norcalcarbmobile.com ----
-      { path: '/', title: 'Home — Mobile CARB Testing $75 | Sacramento · Stockton · Fairfield · San Jose · Bay Area', status: 'LIVE', priority: 'P0' },
-      { path: '/cart', title: 'Cart / Checkout', status: 'LIVE', priority: 'P1' },
-      { path: '/carb-mobile-app', title: 'Download the CARB Compliance App', status: 'LIVE', priority: 'P1' },
-      { path: '/faqs-carb-clean-truck-check-mobile', title: 'FAQ — Clean Truck Check Mobile', status: 'LIVE', priority: 'P0' },
-      { path: '/clean-truck-check-rates', title: 'CARB Clean Truck Check Rates', status: 'LIVE', priority: 'P0' },
-      { path: '/what-is-clean-truck-check', title: 'What Is Clean Truck Check? (HD I/M Explainer)', status: 'LIVE', priority: 'P0' },
-      { path: '/service-area-sacramento-carb-testing', title: 'Service Area — Sacramento', status: 'LIVE', priority: 'P0' },
-      {
-        path: '/service-area-san-joaquin-county-mobile-testing',
-        title: 'Service Area — Stockton / San Joaquin County',
-        status: 'LIVE',
-        priority: 'P0',
-        notes: `Primary-site Stockton page. Sister landing: ${STOCKTON_SISTER_URL}`,
-      },
-      { path: '/service-area-butte-county-clean-truck-check', title: 'Service Area — Butte County (Chico / Oroville / Paradise)', status: 'LIVE', priority: 'P1' },
-      { path: '/east-bay-mobile-carb-testing', title: 'Service Area — East Bay (Oakland / Berkeley / Fremont)', status: 'LIVE', priority: 'P0' },
-      { path: '/san-jose-mobile-carb-testing', title: 'Service Area — San Jose / South Bay', status: 'LIVE', priority: 'P0' },
-      { path: '/clean-truck-check-san-diego', title: 'Service Area — San Diego County', status: 'LIVE', priority: 'P1' },
-
-      // ---- GAP: advertised but missing on norcalcarbmobile.com ----
-      {
-        path: '/service-area-fairfield-clean-truck-check',
-        title: 'Service Area — Fairfield / Vacaville / Solano County',
-        status: 'GAP',
-        priority: 'P0',
-        notes:
-          'Hero lists "Fairfield" but the only Fairfield page lives on cleantruckcheckfairfield.com. Build a parity page so direct traffic + internal links resolve.',
-      },
-      {
-        path: '/service-area-roseville-clean-truck-check',
-        title: 'Service Area — Roseville / Placer County',
-        status: 'GAP',
-        priority: 'P0',
-        notes: 'Sister site cleantruckcheckroseville.com exists. No matching page on primary site.',
-      },
-      {
-        path: '/service-area-napa-vallejo-mobile-carb',
-        title: 'Service Area — Napa / Vallejo / North Bay',
-        status: 'GAP',
-        priority: 'P1',
-        notes: 'Referenced inside cleantruckcheckfairfield.com copy ("Napa, Vallejo"). Needs dedicated landing page.',
-      },
-      {
-        path: '/service-area-san-francisco-peninsula',
-        title: 'Service Area — San Francisco / Peninsula / SFO',
-        status: 'GAP',
-        priority: 'P1',
-        notes: 'carb-clean-truck-check.com hub advertises "Novato → San Jose" corridor and SF/SFO. No SF page on primary.',
-      },
-      {
-        path: '/service-area-fresno-central-valley',
-        title: 'Service Area — Fresno / South Central Valley',
-        status: 'GAP',
-        priority: 'P1',
-        notes: 'Hero promises "Now the Central Valley" but only Stockton/Modesto coverage exists. Fresno gap.',
-      },
-      {
-        path: '/service-area-sonoma-marin',
-        title: 'Service Area — Sonoma / Marin (Novato → Petaluma)',
-        status: 'GAP',
-        priority: 'P2',
-        notes: 'Hub site covers Hwy 101 from Novato. Primary has no Marin/Sonoma page.',
-      },
-      {
-        path: '/fleet-pricing',
-        title: 'Fleet Pricing & Volume Discounts',
-        status: 'GAP',
-        priority: 'P0',
-        notes: 'Site repeatedly says "fleet discounts available" but no dedicated pricing page beyond /clean-truck-check-rates.',
-      },
-      {
-        path: '/book',
-        title: 'Online Booking / Schedule a Visit',
-        status: 'GAP',
-        priority: 'P0',
-        notes: 'Every page CTA points to "Book online" — there is no canonical /book route. Currently a phone-only funnel.',
-      },
-      {
-        path: '/contact',
-        title: 'Contact / Quote Request',
-        status: 'GAP',
-        priority: 'P0',
-        notes: 'No /contact route. Sister Fairfield site has a real booking form — port to primary.',
-      },
-      {
-        path: '/about',
-        title: 'About — NorCal CARB Mobile LLC',
-        status: 'GAP',
-        priority: 'P1',
-        notes: 'Tester ID IF530523, LLC info, credentials — currently scattered across service-area pages.',
-      },
-      {
-        path: '/credentials',
-        title: 'CARB Credentials & Tester ID IF530523',
-        status: 'GAP',
-        priority: 'P1',
-        notes: 'Build a trust page that links to ARB public tester list.',
-      },
-      {
-        path: '/services/obd-testing',
-        title: 'Service — OBD Testing ($75, 2013+ engines)',
-        status: 'GAP',
-        priority: 'P1',
-        notes: 'No deep page for the individual test type.',
-      },
-      {
-        path: '/services/smoke-opacity-j1667',
-        title: 'Service — Smoke Opacity / SAE J1667 ($250)',
-        status: 'GAP',
-        priority: 'P1',
-      },
-      {
-        path: '/services/rv-motorhome',
-        title: 'Service — RV / Motorhome Testing ($300)',
-        status: 'GAP',
-        priority: 'P2',
-      },
-      {
-        path: '/sitemap.xml',
-        title: 'XML sitemap (currently 500 errors)',
-        status: 'GAP',
-        priority: 'P0',
-        notes: 'GET /sitemap.xml returns 500. Search engines can\'t discover new pages until this is fixed.',
-      },
-    ],
-  },
-  {
-    domain: 'carb-clean-truck-check.com',
-    label: 'Sister Hub — Bay Area Marketing',
-    role: 'SISTER',
-    description: 'Network hub covering the SF → San Jose corridor. Routes traffic to regional sister sites.',
-    pages: [
-      { path: '/', title: 'Hub Home — SF · Fairfield · San Jose', status: 'SISTER', priority: 'P0' },
-    ],
-  },
-  {
-    domain: 'cleantruckcheckfairfield.com',
-    label: 'Sister — Fairfield / Solano',
-    role: 'SISTER',
-    description: 'Regional landing site for Fairfield, Vacaville, Vallejo, Napa.',
-    pages: [
-      { path: '/', title: 'Mobile CARB Testing — Fairfield, CA', status: 'SISTER', priority: 'P0' },
-    ],
-  },
-  {
-    domain: 'cleantruckcheckroseville.com',
-    label: 'Sister — Roseville / Placer',
-    role: 'SISTER',
-    description: 'Regional landing site for Roseville, Sacramento, Placer.',
-    pages: [
-      { path: '/', title: 'Mobile CARB Testing — Roseville', status: 'SISTER', priority: 'P1' },
-    ],
-  },
-  {
-    domain: 'carbteststockton.com',
-    label: 'Sister — Stockton / Central Valley (canonical)',
-    role: 'SISTER',
-    description:
-      'Canonical Stockton URL. Active regional site with "Stockton Special" $40/truck fleet promo. Use carbteststockton.com everywhere — not cleantruckcheckstockton.com.',
-    pages: [
-      {
-        path: '/',
-        title: 'Mobile CARB Diesel Testing — Stockton & Central Valley',
-        status: 'SISTER',
-        priority: 'P0',
-        notes: 'If carb-clean-truck-check.com hub or legacy copy links to cleantruckcheckstockton.com, 301 redirect that domain here.',
-      },
-    ],
-  },
-  {
-    domain: 'mobilecarbsmoketest.com',
-    label: 'Sister — San Diego',
-    role: 'SISTER',
-    description: 'Regional landing site for San Diego County.',
-    pages: [
-      { path: '/', title: 'Mobile CARB Smoke Test — San Diego County', status: 'SISTER', priority: 'P1' },
-    ],
-  },
-  {
-    domain: 'silverbackai.agency',
-    label: 'Target — Silverback / GIA',
-    role: 'TARGET',
-    description:
-      'New umbrella property. Migration target. Old NorCal URLs must 301 here, and the GAP pages above must be built natively.',
-    pages: [
-      { path: '/', title: 'Silverback / Gillis Intelligence Agency Home', status: 'PLANNED', priority: 'P0' },
-      { path: '/carb', title: 'NorCal CARB Mobile (product line landing)', status: 'PLANNED', priority: 'P0' },
-      { path: '/carb/book', title: 'CARB — Unified booking funnel', status: 'PLANNED', priority: 'P0' },
-      { path: '/carb/fleet', title: 'CARB — Fleet / Volume program', status: 'PLANNED', priority: 'P0' },
-      {
-        path: '/carb/areas/stockton',
-        title: 'CARB — Stockton / San Joaquin County area landing',
-        status: 'PLANNED',
-        priority: 'P0',
-        notes: `Mirror content from sister site ${STOCKTON_SISTER_URL}. Canonical external URL stays carbteststockton.com until cutover.`,
-      },
-      {
-        path: '/carb/areas/*',
-        title: 'CARB — Other per-area landers (Sac, Fairfield, Roseville, EastBay, San Jose, SD, Napa, SF, Fresno)',
-        status: 'PLANNED',
-        priority: 'P0',
-        notes: 'Stockton uses carbteststockton.com as the live sister URL today.',
-      },
-      { path: '/intel', title: 'GIA Intel / Silent Partner dashboard entry', status: 'PLANNED', priority: 'P1' },
-    ],
-  },
-];
 
 const statusStyle: Record<MigrationStatus, { color: string; bg: string; border: string; label: string; icon: React.ComponentType<{ size?: number }> }> = {
   LIVE:     { color: 'text-emerald-400', bg: 'bg-emerald-900/15', border: 'border-emerald-900/40', label: 'LIVE',     icon: CheckCircle2 },
@@ -302,7 +81,6 @@ const SiteMigration: React.FC = () => {
 
   return (
     <div className="h-full flex flex-col bg-mil-black text-white">
-      {/* Header */}
       <div className="p-6 border-b border-zinc-800 bg-mil-black sticky top-0 z-10">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
@@ -338,7 +116,6 @@ const SiteMigration: React.FC = () => {
           </div>
         </div>
 
-        {/* Filters + copy */}
         <div className="flex flex-wrap items-center justify-between gap-3 mt-5">
           <div className="flex items-center gap-2 flex-wrap">
             <Filter size={14} className="text-zinc-500" />
@@ -371,9 +148,7 @@ const SiteMigration: React.FC = () => {
         </div>
       </div>
 
-      {/* Body */}
       <div className="flex-1 overflow-y-auto p-6 space-y-8">
-        {/* Quick "to-build" callout */}
         <div className="bg-amber-900/10 border border-amber-900/30 rounded-xl p-5">
           <div className="flex items-start gap-3">
             <AlertTriangle className="text-amber-400 mt-0.5" size={20} />
@@ -414,7 +189,6 @@ const SiteMigration: React.FC = () => {
           </div>
         </div>
 
-        {/* Per-domain breakdown */}
         {domains.map((domain) => {
           const pages =
             filter === 'ALL' ? domain.pages : domain.pages.filter((p) => p.status === filter);
@@ -518,9 +292,8 @@ const SiteMigration: React.FC = () => {
           );
         })}
 
-        {/* Footer note */}
         <div className="text-[11px] text-zinc-600 font-mono text-center pt-2 pb-8">
-          Update <span className="text-zinc-400">components/SiteMigration.tsx</span> as pages ship. The
+          Update <span className="text-zinc-400">data/migration.ts</span> as pages ship. The
           &ldquo;Copy gap list&rdquo; button outputs TSV (priority · URL · title · notes) for feeding into Mila or a
           build sprint.
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ViewState } from '../types';
-import { LayoutDashboard, MessageSquare, PieChart, FileText, Zap, Mic, Image as ImageIcon, MapPin, Database, Globe } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, PieChart, FileText, Zap, Mic, Image as ImageIcon, MapPin, Database, Globe, Gauge } from 'lucide-react';
 
 interface SidebarProps {
   currentView: ViewState;
@@ -16,6 +16,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, setView }) => {
     { id: ViewState.CREATIVE_LAB, label: 'Creative Lab', icon: ImageIcon },
     { id: ViewState.ASSET_ANALYZER, label: 'Asset Strategy', icon: PieChart },
     { id: ViewState.MAPS_GROUNDING, label: 'Maps Search', icon: MapPin },
+    { id: ViewState.NORCAL_PROGRESS, label: 'NorCal Progress', icon: Gauge },
     { id: ViewState.SITE_MIGRATION, label: 'Site Migration', icon: Globe },
     { id: ViewState.DOCUMENTS, label: 'Intel / Deployment', icon: FileText },
   ];
