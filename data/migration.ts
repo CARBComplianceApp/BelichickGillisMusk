@@ -13,6 +13,9 @@ import type { MigrationDomain, MigrationPage, MigrationStatus } from '../types';
 export const PRIMARY_DOMAIN = 'norcalcarbmobile.com';
 export const TARGET_DOMAIN = 'silverbackai.agency';
 
+/** Canonical Stockton sister-site URL */
+export const STOCKTON_SISTER_URL = 'https://carbteststockton.com';
+
 export const domains: MigrationDomain[] = [
   {
     domain: 'norcalcarbmobile.com',
@@ -29,7 +32,13 @@ export const domains: MigrationDomain[] = [
       { path: '/clean-truck-check-rates', title: 'CARB Clean Truck Check Rates', status: 'LIVE', priority: 'P0' },
       { path: '/what-is-clean-truck-check', title: 'What Is Clean Truck Check? (HD I/M Explainer)', status: 'LIVE', priority: 'P0' },
       { path: '/service-area-sacramento-carb-testing', title: 'Service Area — Sacramento', status: 'LIVE', priority: 'P0' },
-      { path: '/service-area-san-joaquin-county-mobile-testing', title: 'Service Area — Stockton / San Joaquin County', status: 'LIVE', priority: 'P0' },
+      {
+        path: '/service-area-san-joaquin-county-mobile-testing',
+        title: 'Service Area — Stockton / San Joaquin County',
+        status: 'LIVE',
+        priority: 'P0',
+        notes: `Primary-site Stockton page. Sister landing: ${STOCKTON_SISTER_URL}`,
+      },
       { path: '/service-area-butte-county-clean-truck-check', title: 'Service Area — Butte County (Chico / Oroville / Paradise)', status: 'LIVE', priority: 'P1' },
       { path: '/east-bay-mobile-carb-testing', title: 'Service Area — East Bay (Oakland / Berkeley / Fremont)', status: 'LIVE', priority: 'P0' },
       { path: '/san-jose-mobile-carb-testing', title: 'Service Area — San Jose / South Bay', status: 'LIVE', priority: 'P0' },
@@ -165,9 +174,10 @@ export const domains: MigrationDomain[] = [
   },
   {
     domain: 'carbteststockton.com',
-    label: 'Sister — Stockton (live)',
+    label: 'Sister — Stockton / Central Valley (canonical)',
     role: 'SISTER',
-    description: 'Active Stockton / Central Valley site. "Stockton Special" $40/truck fleet promo lives here. Canonical Stockton property (cleantruckcheckstockton.com is referenced in hub copy but not the canonical live site).',
+    description:
+      'Canonical Stockton URL. Active regional site with "Stockton Special" $40/truck fleet promo.',
     pages: [{ path: '/', title: 'Mobile CARB Diesel Testing — Stockton & Central Valley', status: 'SISTER', priority: 'P0' }],
   },
   {
@@ -189,11 +199,18 @@ export const domains: MigrationDomain[] = [
       { path: '/carb/book', title: 'CARB — Unified booking funnel', status: 'PLANNED', priority: 'P0' },
       { path: '/carb/fleet', title: 'CARB — Fleet / Volume program', status: 'PLANNED', priority: 'P0' },
       {
-        path: '/carb/areas/*',
-        title: 'CARB — Per-area landers (Sac, Stockton, Fairfield, Roseville, EastBay, San Jose, SD, Napa, SF, Fresno)',
+        path: '/carb/areas/stockton',
+        title: 'CARB — Stockton / San Joaquin County area landing',
         status: 'PLANNED',
         priority: 'P0',
-        notes: 'Generated from gap list above.',
+        notes: `Mirror content from sister site ${STOCKTON_SISTER_URL}.`,
+      },
+      {
+        path: '/carb/areas/*',
+        title: 'CARB — Other per-area landers (Sac, Fairfield, Roseville, EastBay, San Jose, SD, Napa, SF, Fresno)',
+        status: 'PLANNED',
+        priority: 'P0',
+        notes: 'Stockton sister URL is carbteststockton.com.',
       },
       { path: '/intel', title: 'GIA Intel / Silent Partner dashboard entry', status: 'PLANNED', priority: 'P1' },
     ],
