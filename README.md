@@ -2,26 +2,36 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Run and deploy your AI Studio app
+# NorCal CARB Mobile + Agent Command Center
 
-This contains everything you need to run your app locally.
+## Architecture
 
-View your app in AI Studio: https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137?showPreview=true&showAssistant=true&project=gen-lang-client-0013150741
+| Layer | Platform | What |
+|-------|----------|------|
+| **Sites** | Cloudflare Pages | `norcalcarbmobile.com` and related domains |
+| **Agents** | Google Cloud / AI Studio | Mila, Kesha, Gemini agents |
+| **API** | Google Cloud Functions | Gmail send, health checks (`api/`) |
 
-Production domain: https://silverbackai.agency (redirects to AI Studio)
+No Vercel. All public sites live on Cloudflare.
 
-## Run Locally
+## NorCal site (primary deliverable)
 
-**Prerequisites:**  Node.js
+Static site at `sites/norcalcarbmobile/` — migrated from Squarespace with the same fonts and CSS, 27 pages, 47×301 redirects, SEO + AI-search-friendly HTML.
 
+```bash
+npm run build:norcal
+cd sites/norcalcarbmobile && npm run preview   # http://localhost:4321
+```
 
-1. Install dependencies:
-   `npm install`
-2. Copy `.env.example` to `.env.local` and set:
-   - `GEMINI_API_KEY` — Gemini API key for Mila/Kesha AI features
-   - Gmail credentials (see [AGENTS.md](AGENTS.md)) if using `/api/gmail/send`
-3. Run the app:
-   `npm run dev`
-4. Deploy API + frontend to Vercel:
-   `vercel --prod`
-   Check Gmail status: `GET /api/health`
+Deploy to Cloudflare Pages — see [sites/norcalcarbmobile/README.md](sites/norcalcarbmobile/README.md).
+
+## Agent command center (local dev)
+
+1. `npm install`
+2. Copy `.env.example` → `.env.local` and set `GEMINI_API_KEY`
+3. `npm run dev` — Vite app on `:3000` (Mila, Kesha, deployment console)
+
+Agents run in **Google AI Studio** for development:
+https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137
+
+Gmail API setup: see [AGENTS.md](AGENTS.md).

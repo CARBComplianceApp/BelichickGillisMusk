@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:norcal": "node sites/norcalcarbmobile/build.mjs",
     "preview": "vite preview",
+    "preview:norcal": "npm run build:norcal && cd sites/norcalcarbmobile && npm run preview",
     "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts"
   },
   "dependencies": {
@@ -21,7 +22,6 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    "@vercel/node": "^5.0.2",
     "@vitejs/plugin-react": "^5.0.0",
     "tsx": "^4.19.3",
     "typescript": "~5.8.2",

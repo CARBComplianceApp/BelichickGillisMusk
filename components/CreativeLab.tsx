@@ -174,7 +174,7 @@ const CreativeLab: React.FC = () => {
             <div className="bg-blue-900/10 border border-blue-900/30 p-4 rounded-xl flex items-start gap-4">
               <AlertCircle className="text-blue-400 mt-1" size={20} />
               <p className="text-zinc-500 text-xs leading-relaxed">
-                Generations are limited to 50 units/hr per client project. For high-volume 4K rendering, contact GIA Engineering.
+                Generations are limited to 50 units/hr per client project. For high-volume 4K rendering, contact NorCal engineering.
               </p>
             </div>
           </div>
