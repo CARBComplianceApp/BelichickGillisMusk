@@ -13,7 +13,7 @@ const DeploymentConsole: React.FC = () => {
     { name: 'Make Automation (GIA)', status: 'LEGACY_DETECTED', color: 'text-mil-danger', desc: 'The Backend. Lead syncing & CRM automation via Make.com. REQUIRES PURGE.' },
     { name: 'Silverback AI App (AI Studio)', status: 'ACTIVE', color: 'text-emerald-500', desc: 'CARBComplianceApp/Silverback-Ai-App on main. Live at aistudio.google.com.' },
     { name: 'silverbackai.agency', status: 'REDIRECT_PENDING', color: 'text-amber-500', desc: 'DNS on Cloudflare. Redirect to AI Studio app preview URL.' },
-    { name: 'NorCal CARB Mobile (Cloudflare)', status: 'STAGED', color: 'text-amber-400', desc: 'Squarespace → Cloudflare Pages migration. 27 pages, 47×301 redirects, consolidated /blog/.' },
+    { name: 'NorCal CARB Mobile (Cloudflare)', status: 'STAGED', color: 'text-amber-400', desc: 'sites/norcalcarbmobile/ → Cloudflare Pages. Deploy: npm run deploy:norcal (uses CF DEPLOY secret).' },
     { name: 'cleantruckcheckfairfield.com', status: 'LIVE', color: 'text-emerald-500', desc: 'DNS active on Cloudflare. Mapping to operational funnel.' },
   ];
 
@@ -65,32 +65,34 @@ vercel --prod --confirm
 
   const cloudflareScript = `
 # =========================================================
-# CLOUDFLARE PAGES DEPLOYMENT: norcalcarbmobile.com
-# MIGRATION: Squarespace → Static Cloudflare Pages
+# CLOUDFLARE PAGES: norcalcarbmobile.com
+# AUTH: Cursor Cloud Agent secret "CF DEPLOY" (same slot as other tokens)
+# Token needs Account → Cloudflare Pages → Edit
 # =========================================================
 
-# 1. BUILD STATIC SITE
-cd sites/norcalcarbmobile
-npm run build
-# Output: sites/norcalcarbmobile/dist/ (27 pages, 47×301 redirects)
+# ONE-COMMAND DEPLOY (from repo root)
+npm run deploy:norcal
 
-# 2. CLOUDFLARE PAGES (via dashboard or wrangler)
-# Dashboard: Connect repo → Build command: cd sites/norcalcarbmobile && npm run build
-#            Output directory: sites/norcalcarbmobile/dist
-# Custom domain: norcalcarbmobile.com
+# What it does:
+# 1. Builds sites/norcalcarbmobile/dist/ (27 pages, 47×301 redirects)
+# 2. Runs wrangler pages deploy using CF DEPLOY → CLOUDFLARE_API_TOKEN
 
-# 3. PRE-CUTOVER: VERIFY REDIRECTS ON STAGING
+# LOCAL PREVIEW FIRST
+npm run preview:norcal
+# → http://localhost:4321
+
+# MANUAL (equivalent)
+cd sites/norcalcarbmobile && npm run build
+export CLOUDFLARE_API_TOKEN="\$CF DEPLOY"
+npx wrangler pages deploy dist --project-name=norcalcarbmobile
+
+# PRE-CUTOVER: verify redirects on *.pages.dev staging URL
 curl -I https://<preview>.pages.dev/service-area-sacramento-carb-testing
 # Expect: 301 → /service-area/sacramento/
 
-# 4. DNS CUTOVER (when ready)
-# Point norcalcarbmobile.com CNAME to <project>.pages.dev
-# Remove Squarespace DNS records
-
-# 5. POST-MIGRATION
-# - Submit sitemap.xml to Google Search Console
-# - Configure SPF/DKIM/DMARC for bryan@norcalcarbmobile.com
-# - Monitor 404s for 30 days
+# DNS CUTOVER (when ready)
+# Custom domain in Cloudflare Pages: norcalcarbmobile.com + www
+# Point CNAME to <project>.pages.dev, remove Squarespace DNS
 `;
 
   const makeProtocol = `

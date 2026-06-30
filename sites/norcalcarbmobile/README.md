@@ -21,6 +21,21 @@ npm run preview   # serves dist/ on :4321
 
 ## Deploy to Cloudflare Pages
 
+**Auth:** Cursor Cloud Agent secret `CF DEPLOY` (Cloudflare Account API token, Pages → Edit).
+
+```bash
+# From repo root
+npm run deploy:norcal
+```
+
+Or from this directory (with `CLOUDFLARE_API_TOKEN` set from `CF DEPLOY`):
+
+```bash
+npm run deploy
+```
+
+### Dashboard alternative
+
 1. Connect this repo to Cloudflare Pages
 2. Set build configuration:
    - **Build command:** `cd sites/norcalcarbmobile && npm run build`

@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "build:norcal": "node sites/norcalcarbmobile/build.mjs",
+    "preview:norcal": "npm run build:norcal && cd sites/norcalcarbmobile && npm run preview",
+    "deploy:norcal": "node scripts/deploy-norcal.mjs",
     "preview": "vite preview",
     "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts"
   },

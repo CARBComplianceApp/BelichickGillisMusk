@@ -5,10 +5,25 @@
 **Project:** "The Silent Partner" — Vite + React 19 frontend with Vercel serverless API routes under `api/`.
 
 ### Run / build
-- Dev server: `npm run dev` (Vite, serves on `0.0.0.0:3000`). Frontend only; API routes run on Vercel (`vercel dev` or production deploy).
-- Production build: `npm run build`; preview with `npm run preview`.
+- Dev server: `npm run dev` (Vite, serves on `0.0.0.0:3000`). Command-center UI only.
+- **NorCal site build:** `npm run build:norcal`
+- **NorCal site preview:** `npm run preview:norcal` → `http://localhost:4321`
+- **NorCal site deploy:** `npm run deploy:norcal` (uses `CF DEPLOY` secret)
+- Production build (command center): `npm run build`
 - API health check (after deploy): `GET /api/health` — reports Gmail + Gemini credential status.
 - There are **no lint or automated test scripts** in `package.json`.
+
+### NorCal site (`sites/norcalcarbmobile/`)
+
+Static HTML for **norcalcarbmobile.com** on Cloudflare Pages — separate from the Vite command center.
+
+**Deploy auth:** set Cursor Cloud Agent secret **`CF DEPLOY`** (same secrets panel as Gmail/Gemini keys). Must be a Cloudflare Account API token with **Pages → Edit** permission (`cfat_…` format).
+
+```bash
+npm run deploy:norcal
+```
+
+Source lives in `sites/norcalcarbmobile/`. Output is `sites/norcalcarbmobile/dist/`.
 
 ### Gmail API credentials (required for `/api/gmail/send`)
 
