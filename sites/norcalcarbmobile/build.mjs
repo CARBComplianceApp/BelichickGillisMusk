@@ -17,6 +17,7 @@ const serviceAreas = JSON.parse(readFileSync(join(ROOT, 'data/service-areas.json
 const blogPosts = JSON.parse(readFileSync(join(ROOT, 'data/blog-posts.json'), 'utf8'));
 const { redirects } = JSON.parse(readFileSync(join(ROOT, 'data/redirects.json'), 'utf8'));
 const layout = readFileSync(join(ROOT, 'templates/layout.html'), 'utf8');
+const homeTemplate = readFileSync(join(ROOT, 'templates/home.html'), 'utf8');
 
 const phoneRaw = site.phone.replace(/-/g, '');
 
@@ -67,7 +68,7 @@ function orgSchema() {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "NorCal CARB Mobile",
-  "description": "Mobile CARB Clean Truck Check testing across Northern California. OBD $75, J1667 smoke opacity $250. We come to your fleet.",
+  "description": "Mobile CARB Clean Truck Check testing across Northern California. OBD $75, OVI and J1667 smoke opacity $199. We come to your fleet.",
   "url": "${site.domain}/",
   "telephone": "+1-${site.phone}",
   "priceRange": "$75-$300",
@@ -83,6 +84,47 @@ function orgSchema() {
   }
 }
 </script>`;
+}
+
+function buildAreaChips(root) {
+  const chips = [
+    ['Sacramento', 'sacramento'],
+    ['Stockton', 'stockton'],
+    ['Fairfield', 'fairfield'],
+    ['San Jose', 'san-jose'],
+    ['Oakland', 'oakland'],
+    ['East Bay', 'oakland'],
+    ['Fremont', 'oakland'],
+    ['Livermore', 'oakland'],
+    ['Modesto', 'stockton'],
+    ['Lodi', 'stockton'],
+    ['Manteca', 'stockton'],
+    ['Merced', 'fresno'],
+    ['Turlock', 'fresno'],
+    ['Fresno', 'fresno'],
+    ['Visalia', 'fresno'],
+    ['Bakersfield', 'fresno'],
+    ['Chico', 'butte-county'],
+    ['Redding', 'butte-county'],
+    ['Yuba City', 'butte-county'],
+    ['San Diego County', 'san-diego'],
+  ];
+  return chips
+    .map(([label, slug]) => `<a href="${root}service-area/${slug}/" class="area-chip">${label}</a>`)
+    .join('\n      ');
+}
+
+function homeContent(root = '') {
+  return render(homeTemplate, {
+    root,
+    phone: site.phone,
+    phoneRaw,
+    obd: String(site.prices.obd),
+    ovi: String(site.prices.ovi),
+    smoke: String(site.prices.smoke),
+    motorhome: String(site.prices.motorhome),
+    areaChips: buildAreaChips(root),
+  });
 }
 
 function pageHtml({ title, description, canonical, content, root = '', schema = '' }) {
@@ -118,85 +160,11 @@ cpSync(join(ROOT, 'src/css/styles.css'), join(DIST, 'css/styles.css'));
 
 // ── Homepage ──
 writePage('index.html', pageHtml({
-  title: 'Mobile CARB Testing $75 | Sacramento, Bay Area, Central Valley | NorCal CARB Mobile',
-  description: 'Mobile CARB Clean Truck Check testing across Northern California. OBD $75, J1667 smoke opacity $250. We come to your fleet. 150+ five-star reviews.',
+  title: 'Mobile CARB Clean Truck Check Testing $75 | NorCal CARB Mobile — Sacramento, Bay Area, Central Valley',
+  description: 'Mobile CARB Clean Truck Check testing across Northern California. OBD $75, OVI $199, J1667 smoke opacity $199. We come to your fleet. 150+ five-star reviews.',
   canonical: `${site.domain}/`,
   schema: orgSchema(),
-  content: `
-    <section class="hero">
-      <div class="container">
-        <span class="hero-badge">150+ Five-Star Reviews · Veteran-Managed</span>
-        <h1>Mobile CARB Clean Truck Check Testing in Northern California</h1>
-        <p class="hero-lead">Fast, accurate, mobile compliance testing — Sacramento Valley, Bay Area, Central Valley, and San Diego County. We come to your fleet yard, job site, or warehouse.</p>
-        <div class="pricing-grid">
-          <div class="price-card">
-            <div class="amount">$${site.prices.obd}</div>
-            <div class="unit">per vehicle · OBD Testing</div>
-            <p style="margin-top:1rem;font-size:0.9375rem;color:var(--color-text-muted)">Plug-in emissions check for 2013+ engine model year diesels.</p>
-          </div>
-          <div class="price-card">
-            <div class="amount">$${site.prices.smoke}</div>
-            <div class="unit">per vehicle · J1667 Smoke Opacity</div>
-            <p style="margin-top:1rem;font-size:0.9375rem;color:var(--color-text-muted)">SAE J1667 snap-acceleration test for pre-2013 diesel engines.</p>
-          </div>
-          <div class="price-card">
-            <div class="amount">$${site.prices.motorhome}</div>
-            <div class="unit">per vehicle · Motorhomes</div>
-            <p style="margin-top:1rem;font-size:0.9375rem;color:var(--color-text-muted)">Specialized testing for Class A motorhomes and RVs.</p>
-          </div>
-        </div>
-        <div class="hero-actions">
-          <a href="tel:${phoneRaw}" class="btn btn-primary">Call ${site.phone}</a>
-          <a href="/contact/" class="btn btn-secondary">Book a Mobile Visit</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="features">
-      <div class="container">
-        <h2>Why Choose NorCal CARB Mobile?</h2>
-        <div class="feature-grid">
-          <div class="feature-item">
-            <h3>Mobile Service</h3>
-            <p>We test at your location to reduce vehicle downtime and avoid trips to inspection stations.</p>
-          </div>
-          <div class="feature-item">
-            <h3>Certified &amp; Accurate</h3>
-            <p>Technicians trained to CARB standards using calibrated equipment. Results uploaded to CTC-VIS.</p>
-          </div>
-          <div class="feature-item">
-            <h3>Fleet-Friendly</h3>
-            <p>Volume discounts, flexible scheduling, nights and weekends available, and centralized billing.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section">
-      <div class="container">
-        <h2>Service Areas</h2>
-        <p>As a 100% mobile business, we serve fleets across a massive geographic footprint. Select your area:</p>
-        <div class="area-grid">
-          ${serviceAreas.map((a) => `
-          <a href="/service-area/${a.slug}/" class="area-card">
-            <strong>${a.name}</strong>
-            <span>Mobile CARB testing</span>
-          </a>`).join('')}
-        </div>
-      </div>
-    </section>
-
-    <section class="cta-band">
-      <div class="container">
-        <h2>Book a Mobile Visit or Get a Fleet Quote</h2>
-        <p>Same-week scheduling available. Early morning and evening appointments. Fleet pricing for multi-vehicle testing.</p>
-        <div class="hero-actions" style="justify-content:center;margin-top:1.5rem">
-          <a href="tel:${phoneRaw}" class="btn btn-primary">Call ${site.phone}</a>
-          <a href="/contact/" class="btn btn-secondary" style="background:transparent;color:#fff;border-color:#fff">Book Online</a>
-        </div>
-      </div>
-    </section>
-  `,
+  content: homeContent(''),
 }));
 
 // ── Service Area Index ──

@@ -1,0 +1,119 @@
+<!--
+  NorCal CARB Mobile — Homepage content template
+  Source of truth until Claude Design MCP import completes.
+  Design project: cc9d0c92-c0bb-49ee-885e-dcb7841afb93
+  File: NorCal CARB Mobile - Home.dc.html
+-->
+<div class="alert-bar">
+  <div class="container alert-bar-inner">
+    <span>📍 Mobile ${{obd}} OBD &amp; ${{ovi}} OVI Clean Truck Check — Call {{phone}} for fleet pricing</span>
+  </div>
+</div>
+
+<section class="hero hero-home">
+  <div class="container">
+    <p class="hero-kicker">OBD testing from ${{obd}} / vehicle</p>
+    <h1>Mobile CARB Clean Truck Check Testing in Northern California</h1>
+    <p class="hero-lead">Fast, accurate, mobile compliance testing — Sacramento Valley &amp; Bay Area. Now the Central Valley and San Diego County. We come to you.</p>
+    <div class="hero-actions">
+      <a href="tel:{{phoneRaw}}" class="btn btn-primary">📞 Call {{phone}}</a>
+      <a href="{{root}}contact/" class="btn btn-secondary">✉️ Email for a Quote</a>
+    </div>
+    <ul class="trust-list">
+      <li>We come to you — your yard or job site</li>
+      <li>CARB-standard calibrated equipment</li>
+      <li>Fleet discounts for 5+ vehicles</li>
+    </ul>
+  </div>
+</section>
+
+<section class="content-section services-home" id="services">
+  <div class="container">
+    <p class="section-label">Our Services</p>
+    <h2>Mobile testing for every compliance need</h2>
+    <p class="section-intro">Licensed mobile emissions testing brought directly to your location to keep your fleet compliant with minimal downtime.</p>
+    <div class="pricing-grid pricing-grid-4">
+      <article class="price-card">
+        <div class="amount">${{obd}}</div>
+        <div class="unit">per vehicle</div>
+        <h3>OBD Emissions Testing</h3>
+        <p>On-board diagnostics testing for CARB Clean Truck Check compliance. For 2013-and-newer engines.</p>
+        <a href="{{root}}services/clean-truck-check/" class="card-link">Learn more →</a>
+      </article>
+      <article class="price-card">
+        <div class="amount">${{ovi}}</div>
+        <div class="unit">per vehicle</div>
+        <h3>OVI Clean Truck Check</h3>
+        <p>Opacity / visual inspection tier of the Clean Truck Check program. Call to confirm the right test for your vehicle.</p>
+        <a href="{{root}}services/clean-truck-check/" class="card-link">Learn more →</a>
+      </article>
+      <article class="price-card">
+        <div class="amount">${{smoke}}</div>
+        <div class="unit">per vehicle</div>
+        <h3>Smoke Opacity (SAE J1667)</h3>
+        <p>Exhaust smoke-opacity testing to CARB standards for pre-2013 diesel engines.</p>
+        <a href="{{root}}services/smoke-opacity-test/" class="card-link">Learn more →</a>
+      </article>
+      <article class="price-card">
+        <div class="amount">${{motorhome}}</div>
+        <div class="unit">per vehicle</div>
+        <h3>RV &amp; Motorhome Testing</h3>
+        <p>Mobile emissions testing for recreational vehicles and motorhomes — we come to you.</p>
+        <a href="{{root}}services/motorhome-testing/" class="card-link">Learn more →</a>
+      </article>
+    </div>
+    <p class="services-note">Also offering CARB agricultural / farm-truck testing. <a href="tel:{{phoneRaw}}">Call for fleet &amp; volume pricing →</a></p>
+  </div>
+</section>
+
+<section class="features features-home">
+  <div class="container">
+    <p class="section-label">Why NorCal CARB Mobile</p>
+    <h2>Compliance without the downtime</h2>
+    <div class="feature-grid feature-grid-4">
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">🚚</span>
+        <h3>Mobile Service</h3>
+        <p>We test at your location to cut vehicle downtime and skip the trip to an inspection station.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">✓</span>
+        <h3>Certified &amp; Accurate</h3>
+        <p>Technicians working to CARB standards with calibrated, up-to-date equipment.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">⚡</span>
+        <h3>Fast Turnaround</h3>
+        <p>Efficient testing so your vehicles get back on the road quickly.</p>
+      </div>
+      <div class="feature-item">
+        <span class="feature-icon" aria-hidden="true">🚛</span>
+        <h3>Fleet-Friendly</h3>
+        <p>Volume discounts, flexible scheduling, and centralized billing for fleets of 5+.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section areas-home">
+  <div class="container">
+    <p class="section-label">Service Area</p>
+    <h2>Serving Northern California &amp; beyond</h2>
+    <p class="section-intro">7 days a week, mobile across the region. Don't see your city? Call — we likely cover it.</p>
+    <div class="area-chips">
+      {{areaChips}}
+    </div>
+    <p class="areas-more"><a href="{{root}}service-area/">View all service areas →</a></p>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <h2>Book a Mobile Visit or Get a Fleet Quote</h2>
+    <p>Same-week scheduling available. Early morning and evening appointments. Fleet pricing for multi-vehicle testing.</p>
+    <div class="hero-actions cta-actions">
+      <a href="tel:{{phoneRaw}}" class="btn btn-primary">Call {{phone}}</a>
+      <a href="{{root}}contact/" class="btn btn-secondary btn-on-dark">Book Online</a>
+    </div>
+  </div>
+</section>
