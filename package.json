@@ -8,7 +8,10 @@
     "build": "vite build",
     "build:norcal": "node sites/norcalcarbmobile/build.mjs",
     "preview": "vite preview",
-    "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts"
+    "gmail:oauth": "tsx scripts/gmail-oauth-setup.ts",
+    "contacts:export": "tsx scripts/export-uniform-contacts.ts --in exports/contacts-seed.json --enrich",
+    "contacts:drive": "tsx scripts/pull-drive-contacts.ts --local exports/drive-samples && tsx scripts/export-uniform-contacts.ts --in exports/drive-pulled.json --out exports/contacts",
+    "contacts:drive:live": "tsx scripts/pull-drive-contacts.ts && tsx scripts/export-uniform-contacts.ts --in exports/drive-pulled.json --out exports/contacts"
   },
   "dependencies": {
     "react": "^19.2.4",
