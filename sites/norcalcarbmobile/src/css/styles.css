@@ -31,6 +31,23 @@ body {
   background: var(--color-bg);
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  padding: 0.75rem 1rem;
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
 h1, h2, h3, h4 {
   font-family: var(--font-heading);
   line-height: 1.2;
@@ -180,6 +197,12 @@ img { max-width: 100%; height: auto; display: block; }
   box-shadow: var(--shadow);
 }
 
+.price-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
 .price-card .amount {
   font-family: var(--font-heading);
   font-size: 2.5rem;
@@ -189,7 +212,159 @@ img { max-width: 100%; height: auto; display: block; }
 
 .price-card .unit { font-size: 1rem; color: var(--color-text-muted); }
 
-/* Features */
+.price-card-featured {
+  border-color: var(--color-accent);
+  background: linear-gradient(180deg, #fffef8 0%, #fff 100%);
+}
+
+.price-card-featured .amount { color: var(--color-accent); }
+
+.price-note {
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.price-disclaimer {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.stars-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+}
+
+.stars-badge .stars { color: var(--color-accent); letter-spacing: 0.05em; }
+
+.service-area-line {
+  margin-top: 1.5rem;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+/* Steps */
+.steps-section { padding: 4rem 0; background: var(--color-bg); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.step-card {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+
+.step-card h3 { color: var(--color-primary); margin-bottom: 0.75rem; }
+
+/* Reviews */
+.reviews-section {
+  padding: 4rem 0;
+  background: var(--color-bg-alt);
+}
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.review-card .stars { color: var(--color-accent); margin-bottom: 0.75rem; }
+
+.review-card blockquote {
+  margin: 0 0 1rem;
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.review-card cite {
+  font-style: normal;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+.reviews-link {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: 600;
+}
+
+/* Full Care */
+.full-care-section {
+  padding: 4rem 0;
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.full-care-section h2 { color: #fff; }
+
+.full-care-section p { opacity: 0.92; max-width: 42rem; }
+
+.full-care-section .btn-primary {
+  background: #fff;
+  color: var(--color-primary);
+  margin-top: 1.5rem;
+}
+
+.full-care-section .btn-primary:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-primary-dark);
+}
+
+.section-intro {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+  color: var(--color-text-muted);
+}
+
+.section-title-center {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
 .features {
   padding: 4rem 0;
   background: var(--color-bg-alt);
