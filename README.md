@@ -12,6 +12,9 @@
 | **Agents** | Google Cloud / AI Studio | Mila, Kesha, Gemini agents |
 | **API** | Google Cloud Functions | Gmail send, health checks (`api/`) |
 
+AI Studio app: https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137?showPreview=true&showAssistant=true&project=gen-lang-client-0013150741
+
+
 No Vercel. All public sites live on Cloudflare.
 
 ## NorCal site (primary deliverable)

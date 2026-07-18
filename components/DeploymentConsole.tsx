@@ -17,6 +17,20 @@ const DeploymentConsole: React.FC = () => {
       script: 'cloudflare' as DeployScript,
     },
     {
+      name: 'Silverback AI App (AI Studio)',
+      status: 'ACTIVE',
+      color: 'text-emerald-500',
+      desc: 'CARBComplianceApp/Silverback-Ai-App on main. Agent UI in Google AI Studio / Google Cloud.',
+      script: 'gcp' as DeployScript,
+    },
+    {
+      name: 'silverbackai.agency',
+      status: 'REDIRECT_PENDING',
+      color: 'text-amber-500',
+      desc: 'Cloudflare redirect rule → AI Studio app preview URL.',
+      script: 'cloudflare' as DeployScript,
+    },
+    {
       name: 'Mila (Chief of Staff Agent)',
       status: 'ACTIVE',
       color: 'text-emerald-500',
@@ -89,6 +103,10 @@ curl -I https://<preview>.pages.dev/service-area-sacramento-carb-testing
 # Submit sitemap.xml to Google Search Console
 # SPF/DKIM/DMARC for bryan@norcalcarbmobile.com
 # Monitor 404s for 30 days
+
+# 8. silverbackai.agency → AI Studio (Cloudflare Redirect Rule)
+# Match: silverbackai.agency + www → 301 to:
+# https://aistudio.google.com/apps/a0beac81-ff66-46e9-9e6a-95a65ce56137?showPreview=true&showAssistant=true&project=gen-lang-client-0013150741
 `;
 
   const gcpScript = `

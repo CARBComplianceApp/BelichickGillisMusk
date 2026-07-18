@@ -1,0 +1,88 @@
+[
+  {
+    "company": "Pacific Lath & Plastering Corp",
+    "contactName": "Chelsea Dodge",
+    "phone": "9495725524",
+    "email": "purchasing@pacificplastering.com",
+    "city": "Fairfield",
+    "state": "CA",
+    "lastServiceDate": "2026-04-29",
+    "notes": "HD-OBD · 2023 Ford Super Duty F-600",
+    "source": "website-booking"
+  },
+  {
+    "company": "Royola Pacific",
+    "contactName": "Andy Liu",
+    "phone": "5109189381",
+    "email": "royolasf@aol.com",
+    "address": "2736 McCone Ave",
+    "city": "Hayward",
+    "state": "CA",
+    "zip": "94545",
+    "lastServiceDate": "2026-06-02",
+    "notes": "International box truck · HD-OBD",
+    "source": "website-booking"
+  },
+  {
+    "company": "KG Pump Service",
+    "contactName": "Carlos A Zepeda-Mendez",
+    "phone": "7073329031",
+    "email": "carlos@kgpumpservice.com",
+    "city": "Fairfield",
+    "state": "CA",
+    "lastServiceDate": "2026-06-11",
+    "notes": "2-4 vehicles · F550 trucks",
+    "source": "website-booking"
+  },
+  {
+    "company": "Rock Crushing Solutions Inc",
+    "contactName": "Jeremy Soiland",
+    "phone": "7075487809",
+    "email": "ddcrushing@yahoo.com",
+    "city": "Fairfield",
+    "state": "CA",
+    "lastServiceDate": "2026-06-15",
+    "notes": "2012 Dodge Ram 5500 · Travis AFB job",
+    "source": "website-booking"
+  },
+  {
+    "company": "JMB Construction",
+    "contactName": "Mike Sousa",
+    "city": "NorCal",
+    "state": "CA",
+    "notes": "Active fleet client",
+    "source": "master-crm-fleet"
+  },
+  {
+    "company": "GR/BR Trucking",
+    "contactName": "Taki",
+    "city": "NorCal",
+    "state": "CA",
+    "notes": "Active fleet client",
+    "source": "master-crm-fleet"
+  },
+  {
+    "company": "B&M Builders",
+    "contactName": "Jeanne Austin",
+    "city": "NorCal",
+    "state": "CA",
+    "notes": "Active fleet client",
+    "source": "master-crm-fleet"
+  },
+  {
+    "company": "Franklin School District",
+    "contactName": "Transportation",
+    "email": "xarellano@pjusd.org",
+    "city": "Patterson",
+    "state": "CA",
+    "notes": "School bus fleet",
+    "source": "master-crm-fleet"
+  },
+  {
+    "company": "Delta Charter Bus",
+    "city": "NorCal",
+    "state": "CA",
+    "notes": "Active fleet client",
+    "source": "master-crm-fleet"
+  }
+]
