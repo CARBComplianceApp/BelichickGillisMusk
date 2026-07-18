@@ -2,34 +2,34 @@
 
 ## Cursor Cloud specific instructions
 
-**Project:** "The Silent Partner" — Vite + React 19 frontend with Vercel serverless API routes under `api/`.
+**Project:** NorCal CARB Mobile operations — static site on **Cloudflare Pages**, agents on **Google Cloud**, command-center UI in Vite + React 19.
+
+### Architecture
+- **Sites** → Cloudflare Pages (`sites/norcalcarbmobile/`)
+- **Agents** (Mila, Kesha) → Google AI Studio / Google Cloud
+- **API** (`api/`) → Google Cloud Functions (Gmail, health)
 
 ### Run / build
-- Dev server: `npm run dev` (Vite, serves on `0.0.0.0:3000`). Frontend only; API routes run on Vercel (`vercel dev` or production deploy).
-- Production build: `npm run build`; preview with `npm run preview`.
-- API health check (after deploy): `GET /api/health` — reports Gmail + Gemini credential status.
-- There are **no lint or automated test scripts** in `package.json`.
+- Dev server: `npm run dev` (Vite, `0.0.0.0:3000`) — agent UI only
+- NorCal site build: `npm run build:norcal`
+- NorCal site preview: `cd sites/norcalcarbmobile && npm run preview`
+- Production build (command center): `npm run build`
+- There are **no lint or automated test scripts** in `package.json`
 
-### Gmail API credentials (required for `/api/gmail/send`)
+### Gmail API (`api/gmail/send.ts`, `api/health.ts`)
 
-The API returns this error until credentials are set:
+Deploy to **Google Cloud Functions** — not Cloudflare, not Vercel.
 
-```
-Gmail credentials aren't configured yet. The API needs either:
-- GOOGLE_SERVICE_ACCOUNT_KEY (preferred), or
-- GOOGLE_CLIENT_ID + GOOGLE_REFRESH_TOKEN
-```
-
-**Set these as Cursor Cloud Agent secrets AND Vercel environment variables.**
+**Set secrets in Google Secret Manager / Cloud Functions env AND Cursor Cloud Agent secrets.**
 
 #### Option A — Service account (Workspace / norcalcarbmobile.com)
 
 1. Google Cloud Console → enable **Gmail API**
 2. Create service account → download JSON key
-3. Google Workspace Admin → Security → API Controls → Domain-wide delegation → authorize the service account client ID with scope `https://mail.google.com/`
-4. Set secrets:
-   - `GOOGLE_SERVICE_ACCOUNT_KEY` = full JSON string (single line) or path to key file
-   - `GOOGLE_IMPERSONATE_USER` = mailbox to send as (e.g. `bryan@norcalcarbmobile.com`)
+3. Google Workspace Admin → Security → API Controls → Domain-wide delegation → authorize client ID with scope `https://mail.google.com/`
+4. Set:
+   - `GOOGLE_SERVICE_ACCOUNT_KEY` = full JSON string or path to key file
+   - `GOOGLE_IMPERSONATE_USER` = `bryan@norcalcarbmobile.com`
 
 #### Option B — OAuth refresh token (personal Gmail)
 

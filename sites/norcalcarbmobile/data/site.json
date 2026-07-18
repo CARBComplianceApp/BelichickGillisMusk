@@ -6,12 +6,17 @@
   "sms": "617-359-6953",
   "email": "bryan@norcalcarbmobile.com",
   "bookingUrl": "https://cal.com/norcalcarbmobile",
-  "reviewCount": 150,
+  "reviewCount": 33,
+  "reviewRating": "5.0",
   "prices": {
     "obd": 75,
-    "smoke": 250,
-    "motorhome": 300
+    "ovi": 199,
+    "motorhomeObd": 99,
+    "motorhomeOvi": 229,
+    "sanDiegoObd": 119,
+    "sanDiegoOvi": 219
   },
+  "serviceAreaLine": "Sacramento · Stockton · Fairfield · San Jose · Bay Area",
   "social": {
     "facebook": "https://www.facebook.com/carbcleantruckcheck/",
     "instagram": "https://www.instagram.com/carb.mobiletruckcheck/",

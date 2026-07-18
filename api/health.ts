@@ -1,12 +1,12 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { getGmailCredentialStatus } from './lib/gmailAuth';
+import { sendJson, type HttpHandler } from './lib/http';
 
-export default function handler(_req: VercelRequest, res: VercelResponse) {
+export const health: HttpHandler = (_req, res) => {
   const gmail = getGmailCredentialStatus();
 
-  res.status(200).json({
+  sendJson(res, 200, {
     ok: true,
-    service: 'gillis-api',
+    service: 'norcal-api',
     gmail: {
       configured: gmail.configured,
       method: gmail.method ?? null,
@@ -17,4 +17,6 @@ export default function handler(_req: VercelRequest, res: VercelResponse) {
       configured: Boolean(process.env.GEMINI_API_KEY?.trim()),
     },
   });
-}
+};
+
+export default health;
