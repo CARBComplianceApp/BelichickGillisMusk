@@ -1,7 +1,7 @@
 [
   {
-    "company": "Antioch — OVI $250 (needs name)",
-    "contactName": "",
+    "company": "Antioch — OBD serviced (add customer name from CRM/invoice)",
+    "contactName": "Customer Tbd",
     "phone": "",
     "phoneDisplay": "",
     "email": "",
@@ -15,10 +15,30 @@
     "crmRow": 2,
     "source": "local:calendar-lines.txt+local:messy-contacts.csv",
     "lastServiceDate": "",
-    "notes": "Raw label: OVI 250 ANITIOCH · Test: OVI · Price: $250 · Area: Antioch | Raw label: OVI 250 antioch · Test: OVI · Price: $250 · Area: Antioch"
+    "serviceStatus": "serviced_likely",
+    "notes": "Raw label: OBD ANTIOCH · Test: OBD · Area: Antioch | OBD completed at Antioch — calendar wrongly said OVI 250; OVI was maybe only never done · Raw label: OBD ANTIOCH - customer TBD · Test: OBD · Area: Antioch"
   },
   {
-    "company": "Fairfield — HD-OBD (needs name)",
+    "company": "Antioch — OVI calendar hold (not serviced)",
+    "contactName": "",
+    "phone": "",
+    "phoneDisplay": "",
+    "email": "",
+    "address": "",
+    "city": "Antioch",
+    "state": "CA",
+    "zip": "",
+    "website": "",
+    "mapsUrl": "",
+    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A3",
+    "crmRow": 3,
+    "source": "local:messy-contacts.csv",
+    "lastServiceDate": "",
+    "serviceStatus": "ovi_prospect",
+    "notes": "BAD calendar placeholder — ignore for serviced list (OBD only) · Raw label: OVI 250 antioch · Test: OVI · Price: $250 · Area: Antioch · Calendar/AI placeholder — OVI was a possible upsell, not a completed test. Verify OBD/invoice/Stripe; do not count as serviced customer."
+  },
+  {
+    "company": "Fairfield — OBD serviced (add customer name from CRM/invoice)",
     "contactName": "Carlos Mendez",
     "phone": "7075558899",
     "phoneDisplay": "(707) 555-8899",
@@ -29,10 +49,11 @@
     "zip": "",
     "website": "",
     "mapsUrl": "",
-    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A3",
-    "crmRow": 3,
+    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A4",
+    "crmRow": 4,
     "source": "local:messy-contacts.csv",
     "lastServiceDate": "",
+    "serviceStatus": "serviced_likely",
     "notes": "Raw label: HD-OBD FAIRFIELD - Carlos Mendez · Test: HD-OBD · Area: Fairfield"
   },
   {
@@ -47,10 +68,11 @@
     "zip": "",
     "website": "",
     "mapsUrl": "",
-    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A4",
-    "crmRow": 4,
+    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A5",
+    "crmRow": 5,
     "source": "local:calendar-lines.txt",
     "lastServiceDate": "",
+    "serviceStatus": "calendar_only",
     "notes": "Raw label: Smoke OVI 219 Hayward · Test: SMOKE · Price: $219 · Area: Hayward"
   },
   {
@@ -65,10 +87,11 @@
     "zip": "",
     "website": "",
     "mapsUrl": "",
-    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A5",
-    "crmRow": 5,
+    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A6",
+    "crmRow": 6,
     "source": "local:calendar-lines.txt",
     "lastServiceDate": "",
+    "serviceStatus": "serviced",
     "notes": ""
   },
   {
@@ -83,14 +106,15 @@
     "zip": "",
     "website": "",
     "mapsUrl": "",
-    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A6",
-    "crmRow": 6,
+    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A7",
+    "crmRow": 7,
     "source": "local:messy-contacts.csv",
     "lastServiceDate": "",
+    "serviceStatus": "serviced_likely",
     "notes": "Known fleet"
   },
   {
-    "company": "OVI (needs name)",
+    "company": "OVI calendar hold (not serviced)",
     "contactName": "",
     "phone": "",
     "phoneDisplay": "",
@@ -101,29 +125,12 @@
     "zip": "",
     "website": "",
     "mapsUrl": "",
-    "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A7",
-    "crmRow": 7,
-    "source": "local:calendar-lines.txt",
-    "lastServiceDate": "",
-    "notes": "Raw label: OVI · Test: OVI"
-  },
-  {
-    "company": "OVI $250 (needs name)",
-    "contactName": "",
-    "phone": "9255550142",
-    "phoneDisplay": "(925) 555-0142",
-    "email": "",
-    "address": "",
-    "city": "",
-    "state": "CA",
-    "zip": "",
-    "website": "",
-    "mapsUrl": "",
     "crmUrl": "https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A8",
     "crmRow": 8,
-    "source": "local:messy-contacts.csv",
+    "source": "local:calendar-lines.txt",
     "lastServiceDate": "",
-    "notes": "Calendar import — no company on event · Raw label: OVI 250 ANITOCH · Test: OVI · Price: $250"
+    "serviceStatus": "ovi_prospect",
+    "notes": "Raw label: OVI 250 ANITOCH · Test: OVI · Price: $250 · Calendar/AI placeholder — OVI was a possible upsell, not a completed test. Verify OBD/invoice/Stripe; do not count as serviced customer."
   },
   {
     "company": "Pacific Fleet Llc (",
@@ -141,10 +148,11 @@
     "crmRow": 9,
     "source": "local:calendar-lines.txt",
     "lastServiceDate": "",
+    "serviceStatus": "unknown",
     "notes": ""
   },
   {
-    "company": "San Diego — OBD $119 (needs name)",
+    "company": "San Diego — OBD serviced (add customer name from CRM/invoice)",
     "contactName": "",
     "phone": "",
     "phoneDisplay": "",
@@ -159,10 +167,11 @@
     "crmRow": 10,
     "source": "local:messy-contacts.csv",
     "lastServiceDate": "",
+    "serviceStatus": "serviced_likely",
     "notes": "Paid stripe — name missing · Raw label: OBD 119 SAN DIEGO · Test: OBD · Price: $119 · Area: San Diego"
   },
   {
-    "company": "Stockton — OBD $75 (needs name)",
+    "company": "Stockton — OBD serviced (add customer name from CRM/invoice)",
     "contactName": "",
     "phone": "",
     "phoneDisplay": "",
@@ -177,6 +186,7 @@
     "crmRow": 11,
     "source": "local:calendar-lines.txt",
     "lastServiceDate": "",
+    "serviceStatus": "serviced_likely",
     "notes": "Raw label: OBD 75 STOCKTON · Test: OBD · Price: $75 · Area: Stockton"
   },
   {
@@ -195,6 +205,7 @@
     "crmRow": 12,
     "source": "local:messy-contacts.csv",
     "lastServiceDate": "",
+    "serviceStatus": "calendar_only",
     "notes": "5 trucks · Raw label: Fleet OVI 169 Tracy · Test: FLEET · Price: $169 · Area: Tracy"
   }
 ]

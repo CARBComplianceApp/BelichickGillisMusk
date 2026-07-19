@@ -41,8 +41,14 @@ Scans these folders when credentials are set:
 | OUTPUT | `1BNfRFl3EH4cL61UEDBVCEyXgC6F1-oQO` |
 | CLAUDE_INBOX | `16mCOT2phrIwclsr3NGufopyIcp4Kyb8t` |
 
-Labels like **OVI 250 ANITOCH** (test type + price + city, no name) are normalized to:
-`Antioch — OVI $250 (needs name)` with notes preserving the raw label.
+Labels like **OVI 250 ANITOCH** are normalized as **calendar holds**, not completed jobs:
+
+- **`ovi_prospect` / `calendar_only`** — possible OVI upsell or AI/calendar placeholder (e.g. you did **OBD** at Antioch but never did the OVI).
+- **`serviced_likely`** — OBD (or real name + phone) from invoice/Stripe/CRM.
+
+Phone exports (`.vcf` / `.html`) **exclude** OVI-only calendar holds by default. Full audit list stays in `.csv` / `.json` with a **Service Status** column. Use `--include-calendar-holds` to include holds in vCard/HTML.
+
+**Real example:** Antioch — calendar said `OVI 250 ANITOCH` but the actual work was **OBD**; OVI was “maybe” only. Do not treat that calendar title as a customer or completed OVI.
 
 **Live Drive pull** (needs `GOOGLE_SERVICE_ACCOUNT_KEY` + `GOOGLE_IMPERSONATE_USER`):
 

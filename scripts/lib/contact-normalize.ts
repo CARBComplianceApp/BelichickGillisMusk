@@ -38,6 +38,13 @@ const CA_CITIES = [
   'ripon',
 ];
 
+export type ServiceStatus =
+  | 'serviced'           // real job (invoice/stripe/CTC-VIS or OBD with identity)
+  | 'serviced_likely'    // OBD + phone/name, not double-checked
+  | 'ovi_prospect'       // calendar said OVI — possible upsell, not performed
+  | 'calendar_only'      // AI/calendar placeholder, no confirmed job
+  | 'unknown';
+
 export type ParsedWeirdLabel = {
   raw: string;
   isWeird: boolean;
@@ -48,6 +55,7 @@ export type ParsedWeirdLabel = {
   company: string;
   phone: string;
   notes: string;
+  serviceStatus: ServiceStatus;
 };
 
 export function normalizePhone(raw: string): string | null {
@@ -103,7 +111,7 @@ function looksLikeRealName(text: string): boolean {
   return t.length > 4 && /[a-z]/i.test(t) && !/^(obd|ovi)\b/i.test(t);
 }
 
-/** Parse labels like "OVI 250 ANITOCH" into structured fields. */
+/** Parse labels like "OVI 250 ANITOCH" — often calendar placeholders, not completed jobs. */
 export function parseWeirdLabel(raw: string): ParsedWeirdLabel {
   const text = raw.trim().replace(/\s+/g, ' ');
   const phoneMatch = text.match(/(?:\+?1[\s.-]?)?(?:\(?\d{3}\)?[\s.-]?)\d{3}[\s.-]?\d{4}/);
@@ -128,21 +136,51 @@ export function parseWeirdLabel(raw: string): ParsedWeirdLabel {
     remainder = dashSplit[0];
   }
 
+  const isOviOnlyCalendar =
+    /\bOVI\b/i.test(testType) &&
+    !/\bOBD\b/i.test(text) &&
+    !contactName &&
+    !looksLikeRealName(remainder);
+
   const company = isWeird
     ? [city, testType, price ? `$${price}` : ''].filter(Boolean).join(' — ') || titleCaseWords(remainder)
     : titleCaseWords(remainder);
 
-  const displayCompany = isWeird
-    ? city
-      ? `${city} — ${testType || 'Test'}${price ? ` $${price}` : ''} (needs name)`
-      : `${testType || 'Test'}${price ? ` $${price}` : ''} (needs name)`
-    : company;
+  let displayCompany = company;
+  if (isWeird) {
+    if (isOviOnlyCalendar) {
+      displayCompany = city
+        ? `${city} — OVI calendar hold (not serviced)`
+        : 'OVI calendar hold (not serviced)';
+    } else if (/\bOBD\b/i.test(testType) && city) {
+      displayCompany = `${city} — OBD serviced (add customer name from CRM/invoice)`;
+    } else {
+      displayCompany = city
+        ? `${city} — ${testType || 'Test'}${price ? ` $${price}` : ''} (needs name)`
+        : `${testType || 'Test'}${price ? ` $${price}` : ''} (needs name)`;
+    }
+  }
 
-  const notes = isWeird
+  let serviceStatus: ServiceStatus = 'unknown';
+  if (isOviOnlyCalendar) {
+    serviceStatus = 'ovi_prospect';
+  } else if (isWeird && /\bOBD\b/i.test(testType) && (phone || contactName || city)) {
+    serviceStatus = 'serviced_likely';
+  } else if (isWeird && !phone && !contactName) {
+    serviceStatus = 'calendar_only';
+  } else if (!isWeird && (phone || contactName)) {
+    serviceStatus = 'serviced';
+  }
+
+  const noteParts = isWeird
     ? [`Raw label: ${raw}`, testType && `Test: ${testType}`, price && `Price: $${price}`, city && `Area: ${city}`]
-        .filter(Boolean)
-        .join(' · ')
-    : '';
+    : [];
+  if (isOviOnlyCalendar) {
+    noteParts.push(
+      'Calendar/AI placeholder — OVI was a possible upsell, not a completed test. Verify OBD/invoice/Stripe; do not count as serviced customer.'
+    );
+  }
+  const notes = noteParts.filter(Boolean).join(' · ');
 
   return {
     raw,
@@ -154,6 +192,7 @@ export function parseWeirdLabel(raw: string): ParsedWeirdLabel {
     company: displayCompany,
     phone,
     notes,
+    serviceStatus,
   };
 }
 
@@ -165,6 +204,7 @@ export function rowToContactFields(row: Record<string, string>): {
   city: string;
   notes: string;
   isWeird: boolean;
+  serviceStatus: ServiceStatus;
 } {
   const candidates = [
     row.company,
@@ -187,6 +227,7 @@ export function rowToContactFields(row: Record<string, string>): {
   let contactName = (row.contact || row['contact name'] || '').trim();
   let isWeird = false;
   let notes = (row.notes || row.note || '').trim();
+  let serviceStatus: ServiceStatus = 'unknown';
 
   for (const c of candidates) {
     const parsed = parseWeirdLabel(c);
@@ -194,6 +235,7 @@ export function rowToContactFields(row: Record<string, string>): {
       isWeird = true;
       company = parsed.company;
       contactName = contactName || parsed.contactName;
+      serviceStatus = parsed.serviceStatus;
       notes = [notes, parsed.notes].filter(Boolean).join(' · ');
       break;
     }
@@ -207,10 +249,15 @@ export function rowToContactFields(row: Record<string, string>): {
     const parsed = parseWeirdLabel(candidates[0]);
     company = parsed.company;
     isWeird = parsed.isWeird;
+    serviceStatus = parsed.serviceStatus;
     notes = [notes, parsed.notes].filter(Boolean).join(' · ');
   }
 
   const city = (row.city || findCity(candidates.join(' ')) || '').trim();
+
+  if (serviceStatus === 'unknown' && (phone || contactName)) {
+    serviceStatus = 'serviced_likely';
+  }
 
   return {
     company,
@@ -220,5 +267,6 @@ export function rowToContactFields(row: Record<string, string>): {
     city: city ? titleCaseWords(city) : findCity(candidates.join(' ')),
     notes,
     isWeird,
+    serviceStatus,
   };
 }

@@ -6,19 +6,33 @@
   "weirdCount": 8,
   "contacts": [
     {
-      "company": "Antioch — OVI $250 (needs name)",
+      "company": "Antioch — OBD serviced (add customer name from CRM/invoice)",
+      "contactName": "Customer Tbd",
+      "phone": "",
+      "email": "",
+      "city": "Antioch",
+      "state": "CA",
+      "notes": "Raw label: OBD ANTIOCH · Test: OBD · Area: Antioch | OBD completed at Antioch — calendar wrongly said OVI 250; OVI was maybe only never done · Raw label: OBD ANTIOCH - customer TBD · Test: OBD · Area: Antioch",
+      "source": "local:calendar-lines.txt+local:messy-contacts.csv",
+      "driveFileName": "calendar-lines.txt",
+      "isWeird": true,
+      "serviceStatus": "serviced_likely"
+    },
+    {
+      "company": "Antioch — OVI calendar hold (not serviced)",
       "contactName": "",
       "phone": "",
       "email": "",
       "city": "Antioch",
       "state": "CA",
-      "notes": "Raw label: OVI 250 ANITIOCH · Test: OVI · Price: $250 · Area: Antioch | Raw label: OVI 250 antioch · Test: OVI · Price: $250 · Area: Antioch",
-      "source": "local:calendar-lines.txt+local:messy-contacts.csv",
-      "driveFileName": "calendar-lines.txt",
-      "isWeird": true
+      "notes": "BAD calendar placeholder — ignore for serviced list (OBD only) · Raw label: OVI 250 antioch · Test: OVI · Price: $250 · Area: Antioch · Calendar/AI placeholder — OVI was a possible upsell, not a completed test. Verify OBD/invoice/Stripe; do not count as serviced customer.",
+      "source": "local:messy-contacts.csv",
+      "driveFileName": "messy-contacts.csv",
+      "isWeird": true,
+      "serviceStatus": "ovi_prospect"
     },
     {
-      "company": "Fairfield — HD-OBD (needs name)",
+      "company": "Fairfield — OBD serviced (add customer name from CRM/invoice)",
       "contactName": "Carlos Mendez",
       "phone": "7075558899",
       "email": "",
@@ -27,7 +41,8 @@
       "notes": "Raw label: HD-OBD FAIRFIELD - Carlos Mendez · Test: HD-OBD · Area: Fairfield",
       "source": "local:messy-contacts.csv",
       "driveFileName": "messy-contacts.csv",
-      "isWeird": true
+      "isWeird": true,
+      "serviceStatus": "serviced_likely"
     },
     {
       "company": "Hayward — SMOKE $219 (needs name)",
@@ -39,7 +54,8 @@
       "notes": "Raw label: Smoke OVI 219 Hayward · Test: SMOKE · Price: $219 · Area: Hayward",
       "source": "local:calendar-lines.txt",
       "driveFileName": "calendar-lines.txt",
-      "isWeird": true
+      "isWeird": true,
+      "serviceStatus": "calendar_only"
     },
     {
       "company": "Jeanne",
@@ -51,7 +67,8 @@
       "notes": "",
       "source": "local:calendar-lines.txt",
       "driveFileName": "calendar-lines.txt",
-      "isWeird": false
+      "isWeird": false,
+      "serviceStatus": "serviced"
     },
     {
       "company": "Mike Sousa Jmb Construction",
@@ -63,31 +80,21 @@
       "notes": "Known fleet",
       "source": "local:messy-contacts.csv",
       "driveFileName": "messy-contacts.csv",
-      "isWeird": false
+      "isWeird": false,
+      "serviceStatus": "serviced_likely"
     },
     {
-      "company": "OVI (needs name)",
+      "company": "OVI calendar hold (not serviced)",
       "contactName": "",
       "phone": "",
       "email": "",
       "city": "",
       "state": "CA",
-      "notes": "Raw label: OVI · Test: OVI",
+      "notes": "Raw label: OVI 250 ANITOCH · Test: OVI · Price: $250 · Calendar/AI placeholder — OVI was a possible upsell, not a completed test. Verify OBD/invoice/Stripe; do not count as serviced customer.",
       "source": "local:calendar-lines.txt",
       "driveFileName": "calendar-lines.txt",
-      "isWeird": true
-    },
-    {
-      "company": "OVI $250 (needs name)",
-      "contactName": "",
-      "phone": "9255550142",
-      "email": "",
-      "city": "",
-      "state": "CA",
-      "notes": "Calendar import — no company on event · Raw label: OVI 250 ANITOCH · Test: OVI · Price: $250",
-      "source": "local:messy-contacts.csv",
-      "driveFileName": "messy-contacts.csv",
-      "isWeird": true
+      "isWeird": true,
+      "serviceStatus": "ovi_prospect"
     },
     {
       "company": "Pacific Fleet Llc (",
@@ -99,10 +106,11 @@
       "notes": "",
       "source": "local:calendar-lines.txt",
       "driveFileName": "calendar-lines.txt",
-      "isWeird": false
+      "isWeird": false,
+      "serviceStatus": "unknown"
     },
     {
-      "company": "San Diego — OBD $119 (needs name)",
+      "company": "San Diego — OBD serviced (add customer name from CRM/invoice)",
       "contactName": "",
       "phone": "",
       "email": "",
@@ -111,10 +119,11 @@
       "notes": "Paid stripe — name missing · Raw label: OBD 119 SAN DIEGO · Test: OBD · Price: $119 · Area: San Diego",
       "source": "local:messy-contacts.csv",
       "driveFileName": "messy-contacts.csv",
-      "isWeird": true
+      "isWeird": true,
+      "serviceStatus": "serviced_likely"
     },
     {
-      "company": "Stockton — OBD $75 (needs name)",
+      "company": "Stockton — OBD serviced (add customer name from CRM/invoice)",
       "contactName": "",
       "phone": "",
       "email": "",
@@ -123,7 +132,8 @@
       "notes": "Raw label: OBD 75 STOCKTON · Test: OBD · Price: $75 · Area: Stockton",
       "source": "local:calendar-lines.txt",
       "driveFileName": "calendar-lines.txt",
-      "isWeird": true
+      "isWeird": true,
+      "serviceStatus": "serviced_likely"
     },
     {
       "company": "Tracy — FLEET $169 (needs name)",
@@ -135,7 +145,8 @@
       "notes": "5 trucks · Raw label: Fleet OVI 169 Tracy · Test: FLEET · Price: $169 · Area: Tracy",
       "source": "local:messy-contacts.csv",
       "driveFileName": "messy-contacts.csv",
-      "isWeird": true
+      "isWeird": true,
+      "serviceStatus": "calendar_only"
     }
   ]
 }

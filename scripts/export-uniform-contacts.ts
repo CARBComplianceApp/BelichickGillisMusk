@@ -34,6 +34,7 @@ export type UniformContact = {
   crmRow?: number;
   source: string;
   lastServiceDate: string;
+  serviceStatus: string;
   notes: string;
 };
 
@@ -139,10 +140,12 @@ function crmUrlForRow(row?: number, company?: string): string {
 function buildContact(partial: Partial<UniformContact> & { phone?: string; company?: string }): UniformContact | null {
   const digits = partial.phone ? normalizePhone(partial.phone) : null;
   const companyRaw = partial.company || '';
-  const company =
-    companyRaw.includes('(needs name)') || companyRaw.includes(' — OVI') || companyRaw.includes(' — OBD')
-      ? companyRaw.trim()
-      : titleCase(companyRaw);
+  const preserveLabel =
+    companyRaw.includes('(needs name)') ||
+    companyRaw.includes('calendar hold') ||
+    companyRaw.includes(' — OBD') ||
+    companyRaw.includes(' — OVI');
+  const company = preserveLabel ? companyRaw.trim() : titleCase(companyRaw);
   const contactName = titleCase(partial.contactName || '');
   const displayCompany = company || contactName;
   if (!displayCompany) return null;
@@ -160,10 +163,11 @@ function buildContact(partial: Partial<UniformContact> & { phone?: string; compa
     zip: (partial.zip || '').trim(),
     website: (partial.website || '').trim(),
     mapsUrl: partial.mapsUrl || '',
-      crmUrl: partial.crmUrl || crmUrlForRow(partial.crmRow, displayCompany),
+    crmUrl: partial.crmUrl || crmUrlForRow(partial.crmRow, displayCompany),
     crmRow: partial.crmRow,
     source: partial.source || 'import',
     lastServiceDate: partial.lastServiceDate || '',
+    serviceStatus: partial.serviceStatus || 'unknown',
     notes: (partial.notes || '').trim(),
   };
 }
@@ -356,6 +360,10 @@ function toVcard(contacts: UniformContact[]): string {
   return `${cards.join('\r\n')}\r\n`;
 }
 
+function isCallableContact(c: UniformContact): boolean {
+  return !['ovi_prospect', 'calendar_only'].includes(c.serviceStatus || '');
+}
+
 function toCsv(contacts: UniformContact[]): string {
   const headers = [
     'Company',
@@ -370,6 +378,7 @@ function toCsv(contacts: UniformContact[]): string {
     'Google Maps',
     'CRM Link',
     'CRM Row',
+    'Service Status',
     'Last Service',
     'Source',
     'Notes',
@@ -388,6 +397,7 @@ function toCsv(contacts: UniformContact[]): string {
       c.mapsUrl,
       c.crmUrl,
       c.crmRow ?? '',
+      c.serviceStatus || '',
       c.lastServiceDate,
       c.source,
       c.notes,
@@ -483,6 +493,18 @@ async function main() {
 
   contacts = dedupe(contacts);
 
+  const allContacts = contacts;
+  const includeHolds = args['include-calendar-holds'] === 'true';
+  if (!includeHolds) {
+    const dropped = contacts.filter((c) => !isCallableContact(c));
+    contacts = contacts.filter(isCallableContact);
+    if (dropped.length) {
+      console.error(
+        `Excluded ${dropped.length} calendar/OVI-only holds from phone export (use --include-calendar-holds for all rows in vcf/html)`
+      );
+    }
+  }
+
   const placesKey = process.env.GOOGLE_PLACES_API_KEY?.trim();
   if (args.enrich === 'true' && placesKey) {
     console.error(`Enriching ${contacts.length} contacts via Google Places...`);
@@ -508,11 +530,11 @@ async function main() {
   const jsonPath = path.join(outDir, 'norcal-contacts.json');
 
   fs.writeFileSync(vcfPath, toVcard(contacts));
-  fs.writeFileSync(csvPath, toCsv(contacts));
+  fs.writeFileSync(csvPath, toCsv(allContacts));
   fs.writeFileSync(htmlPath, toHtml(contacts));
-  fs.writeFileSync(jsonPath, `${JSON.stringify(contacts, null, 2)}\n`);
+  fs.writeFileSync(jsonPath, `${JSON.stringify(allContacts, null, 2)}\n`);
 
-  console.error(`Wrote ${contacts.length} contacts to ${outDir}/`);
+  console.error(`Wrote ${contacts.length} callable contacts to ${outDir}/ (${allContacts.length} total in CSV/JSON)`);
   console.log(JSON.stringify({ vcf: vcfPath, csv: csvPath, html: htmlPath, json: jsonPath, count: contacts.length }));
 }
 

@@ -1,25 +1,19 @@
 BEGIN:VCARD
 VERSION:3.0
-FN:Antioch — OVI $250 (needs name)
-ORG:Antioch — OVI $250 (needs name)
+FN:Antioch — OBD serviced (add customer name from CRM/invoice)
+N:;Customer Tbd;;;
+ORG:Antioch — OBD serviced (add customer name from CRM/invoice)
 URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A2
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A2 | Raw label: OVI 250 ANITIOCH · Test: OVI · Price: $250 · Area: Antioch | Raw label: OVI 250 antioch · Test: OVI · Price: $250 · Area: Antioch
+NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A2 | Raw label: OBD ANTIOCH · Test: OBD · Area: Antioch | OBD completed at Antioch — calendar wrongly said OVI 250; OVI was maybe only never done · Raw label: OBD ANTIOCH - customer TBD · Test: OBD · Area: Antioch
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
-FN:Fairfield — HD-OBD (needs name)
+FN:Fairfield — OBD serviced (add customer name from CRM/invoice)
 N:;Carlos Mendez;;;
-ORG:Fairfield — HD-OBD (needs name)
+ORG:Fairfield — OBD serviced (add customer name from CRM/invoice)
 TEL;TYPE=CELL:+17075558899
-URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A3
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A3 | Raw label: HD-OBD FAIRFIELD - Carlos Mendez · Test: HD-OBD · Area: Fairfield
-END:VCARD
-BEGIN:VCARD
-VERSION:3.0
-FN:Hayward — SMOKE $219 (needs name)
-ORG:Hayward — SMOKE $219 (needs name)
 URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A4
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A4 | Raw label: Smoke OVI 219 Hayward · Test: SMOKE · Price: $219 · Area: Hayward
+NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A4 | Raw label: HD-OBD FAIRFIELD - Carlos Mendez · Test: HD-OBD · Area: Fairfield
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
@@ -27,31 +21,16 @@ FN:Jeanne
 N:;B&m Builders;;;
 ORG:Jeanne
 TEL;TYPE=CELL:+15105554412
-URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A5
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A5
+URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A6
+NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A6
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
 FN:Mike Sousa Jmb Construction
 ORG:Mike Sousa Jmb Construction
 TEL;TYPE=CELL:+19165553301
-URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A6
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A6 | Known fleet
-END:VCARD
-BEGIN:VCARD
-VERSION:3.0
-FN:OVI (needs name)
-ORG:OVI (needs name)
 URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A7
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A7 | Raw label: OVI · Test: OVI
-END:VCARD
-BEGIN:VCARD
-VERSION:3.0
-FN:OVI $250 (needs name)
-ORG:OVI $250 (needs name)
-TEL;TYPE=CELL:+19255550142
-URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A8
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A8 | Calendar import — no company on event · Raw label: OVI 250 ANITOCH · Test: OVI · Price: $250
+NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A7 | Known fleet
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
@@ -63,23 +42,15 @@ NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zW
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
-FN:San Diego — OBD $119 (needs name)
-ORG:San Diego — OBD $119 (needs name)
+FN:San Diego — OBD serviced (add customer name from CRM/invoice)
+ORG:San Diego — OBD serviced (add customer name from CRM/invoice)
 URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A10
 NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A10 | Paid stripe — name missing · Raw label: OBD 119 SAN DIEGO · Test: OBD · Price: $119 · Area: San Diego
 END:VCARD
 BEGIN:VCARD
 VERSION:3.0
-FN:Stockton — OBD $75 (needs name)
-ORG:Stockton — OBD $75 (needs name)
+FN:Stockton — OBD serviced (add customer name from CRM/invoice)
+ORG:Stockton — OBD serviced (add customer name from CRM/invoice)
 URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A11
 NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A11 | Raw label: OBD 75 STOCKTON · Test: OBD · Price: $75 · Area: Stockton
-END:VCARD
-BEGIN:VCARD
-VERSION:3.0
-FN:Tracy — FLEET $169 (needs name)
-ORG:Tracy — FLEET $169 (needs name)
-TEL;TYPE=CELL:+12095552200
-URL;TYPE=OTHER:https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A12
-NOTE:CRM https://docs.google.com/spreadsheets/d/1TdNnf7eLaPNN3anaBGpNdjo_unK04zWwZJ859ZDvIO4/edit#gid=0&range=A12 | 5 trucks · Raw label: Fleet OVI 169 Tracy · Test: FLEET · Price: $169 · Area: Tracy
 END:VCARD

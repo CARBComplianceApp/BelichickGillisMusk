@@ -1,6 +1,8 @@
-OVI 250 ANITOCH 9255550142
+# Real: OBD at Antioch (use invoice/CRM for customer name — not the OVI calendar title)
+OBD ANTIOCH
+# Calendar noise — not a completed OVI job:
+OVI 250 ANITOCH
 OBD 75 STOCKTON
 Smoke OVI 219 Hayward
 Pacific Fleet LLC (415) 555-9988
-OVI 250 ANITIOCH
 Jeanne - B&M Builders 5105554412

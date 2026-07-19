@@ -14,7 +14,7 @@ import fs from 'fs';
 import path from 'path';
 import { google } from 'googleapis';
 import { JWT } from 'google-auth-library';
-import { parseWeirdLabel, rowToContactFields, normalizePhone } from './lib/contact-normalize.js';
+import { parseWeirdLabel, rowToContactFields, normalizePhone, type ServiceStatus } from './lib/contact-normalize.js';
 
 const DRIVE_FOLDERS: Record<string, string> = {
   RAW_UPLOADS: '1lO0xjCn3hnCubFFVnuNPQ8c0Y8lGt_bg',
@@ -46,6 +46,7 @@ type RawContact = {
   driveFileId?: string;
   driveFileName?: string;
   isWeird: boolean;
+  serviceStatus: ServiceStatus;
 };
 
 function parseArgs(argv: string[]) {
@@ -130,6 +131,7 @@ function parseContactsFromText(text: string, source: string, meta?: { id?: strin
         driveFileId: meta?.id,
         driveFileName: meta?.name,
         isWeird: parsed.isWeird,
+        serviceStatus: parsed.serviceStatus,
       });
     }
     return contacts;
@@ -158,6 +160,7 @@ function parseContactsFromText(text: string, source: string, meta?: { id?: strin
         driveFileId: meta?.id,
         driveFileName: meta?.name,
         isWeird: fields.isWeird,
+        serviceStatus: fields.serviceStatus,
       });
     }
     return contacts;
@@ -181,6 +184,7 @@ function parseContactsFromText(text: string, source: string, meta?: { id?: strin
         driveFileId: meta?.id,
         driveFileName: meta?.name,
         isWeird: parsed.isWeird,
+        serviceStatus: parsed.serviceStatus,
       });
     }
   }
