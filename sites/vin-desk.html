@@ -5,8 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VIN Desk — NorCal CARB Mobile</title>
   <meta name="description" content="Decode a VIN, get year/make/model/engine, and the OBD vs opacity test to book. Not a CARB registry status." />
+  <style>
+    :root { --bg:#07111f; --card:#0e1a2e; --line:#1c2e4a; --text:#e8eef8; --muted:#8aa0bf; --go:#3dff9a; --warn:#ffcc66; --bad:#ff6b6b; --accent:#4da3ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, sans-serif; background:var(--bg); color:var(--text); }
+    main { max-width: 720px; margin: 0 auto; padding: 20px 16px 64px; }
+    h1 { font-size: 22px; margin: 0 0 4px; letter-spacing: .04em; }
+    .sub { color:var(--muted); font-size:13px; margin-bottom:16px; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; margin-bottom:12px; }
+    label { display:block; font-size:11px; letter-spacing:.12em; color:var(--muted); margin-bottom:8px; text-transform:uppercase; }
+    input, textarea { width:100%; background:#071422; color:var(--text); border:1px solid var(--line); border-radius:12px; padding:14px; font: 16px/1.3 ui-monospace, monospace; text-transform:uppercase; }
+    textarea { min-height: 96px; }
+    .row { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+    button { border:0; border-radius:12px; padding:12px 16px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; }
+    .go { background:var(--go); color:#042014; }
+    .ghost { background:transparent; color:var(--text); border:1px solid var(--line); }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:8px; }
+    .k { color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+    .v { font-size:16px; font-weight:700; margin-top:2px; word-break:break-word; }
+    .badge { display:inline-block; padding:4px 8px; border-radius:999px; font-size:12px; font-weight:800; }
+    .ok { background:#123; color:var(--go); }
+    .warn { background:#2a2208; color:var(--warn); }
+    .bad { background:#2a1010; color:var(--bad); }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { text-align:left; padding:8px 4px; border-bottom:1px solid var(--line); }
+    a { color:var(--accent); }
+    .err { color:var(--bad); font-size:14px; margin-top:8px; }
+  </style>
 </head>
 <body>
-  <p>See workspace artifacts/vin-desk.html for the full working desk. This path is a pointer so Donger can find the ship file in-repo after the next push of the complete file.</p>
+  <main>
+    <h1>VIN DESK</h1>
+    <p class="sub">Real NHTSA decode. Suggests OBD vs opacity. Does <b>not</b> claim CARB registry COMPLIANT.</p>
+    <div class="card">
+      <label for="vin">One VIN</label>
+      <input id="vin" maxlength="17" placeholder="17-CHAR VIN" autocomplete="off" />
+      <div class="row">
+        <button class="go" id="checkOne">Check VIN</button>
+        <button class="ghost" id="clearOne">Clear</button>
+      </div>
+      <div id="oneErr" class="err"></div>
+    </div>
+    <div class="card" id="result" hidden></div>
+    <div class="card">
+      <label for="batch">Batch — paste VINs, one per line</label>
+      <textarea id="batch" placeholder="1HT..."></textarea>
+      <div class="row">
+        <button class="go" id="checkBatch">Run list</button>
+        <button class="ghost" id="exportCsv">Export CSV</button>
+      </div>
+    </div>
+    <div class="card">
+      <label>This session</label>
+      <div id="logWrap"><p class="sub">No lookups yet.</p></div>
+    </div>
+    <p class="sub">Book: <a href="tel:9168904427">916-890-4427</a> · OBD $75 · Mobile OVI $199 · NorCal CARB Mobile</p>
+  </main>
+  <script>
+    const MAP = Object.assign({}, ...[...Array(10)].map((_,i)=>({[i]:i})), {
+      A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:1,K:2,L:3,M:4,N:5,P:7,R:9,S:2,T:3,U:4,V:5,W:6,X:7,Y:8,Z:9
+    });
+    const W = [8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
+    const LOG_KEY = "norcal_vin_desk_v1";
+    function clean(v){ return String(v||"").toUpperCase().replace(/[^A-HJ-NPR-Z0-9]/g,"").slice(0,17); }
+    function checkDigit(vin){
+      if (vin.length !== 17) return { ok:false, reason:"Need 17 characters" };
+      if (/[IOQ]/.test(vin)) return { ok:false, reason:"I, O, Q are not used in VINs" };
+      let sum = 0;
+      for (let i=0;i<17;i++){
+        const n = MAP[vin[i]];
+        if (n == null) return { ok:false, reason:"Bad character at "+(i+1) };
+        sum += n * W[i];
+      }
+      const r = sum % 11;
+      const d = r === 10 ? "X" : String(r);
+      return { ok: vin[8] === d, reason: vin[8] === d ? "Check digit OK" : "Check-digit mismatch (pos 9 should be "+d+")", expected:d };
+    }
+    function testType(year){
+      const y = parseInt(year,10);
+      if (!y) return { test:"Unknown", price:"Call", note:"No model year from NHTSA." };
+      if (y >= 2013) return { test:"OBD", price:"$75", note:"2013+ typically OBD Clean Truck Check." };
+      if (y >= 1998 && y <= 2012) return { test:"Opacity / OVI", price:"$199", note:"1998–2012 typically SAE J1667 opacity (mobile OVI)." };
+      return { test:"Likely exempt / confirm", price:"Call", note:"Pre-1998 usually outside CTC periodic test. Confirm use and GVWR." };
+    }
+    function loadLog(){ try { return JSON.parse(localStorage.getItem(LOG_KEY)||"[]"); } catch { return []; } }
+    function saveLog(rows){ localStorage.setItem(LOG_KEY, JSON.stringify(rows.slice(0,200))); renderLog(); }
+    function addLog(row){ const rows = loadLog(); rows.unshift(row); saveLog(rows); }
+    async function decode(vin){
+      const cd = checkDigit(vin);
+      const url = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvalues/"+encodeURIComponent(vin)+"?format=json";
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("NHTSA "+res.status);
+      const json = await res.json();
+      const r = (json.Results && json.Results[0]) || {};
+      const tt = testType(r.ModelYear);
+      return { ts: new Date().toISOString(), vin, checkOk: cd.ok, checkNote: cd.reason, year: r.ModelYear || "", make: r.Make || "", model: r.Model || "", manufacturer: r.Manufacturer || "", engine: r.EngineModel || "", displ: r.DisplacementL || "", fuel: r.FuelTypePrimary || "", gvwr: r.GVWR || "", type: r.VehicleType || "", nhtsa: r.ErrorText || "", test: tt.test, price: tt.price, note: tt.note };
+    }
+    function renderResult(d){
+      const el = document.getElementById("result");
+      el.hidden = false;
+      const badge = d.checkOk ? '<span class="badge ok">VIN STRUCTURE OK</span>' : '<span class="badge bad">CHECK DIGIT FAIL</span>';
+      el.innerHTML = badge + '<p class="v" style="margin:10px 0 14px;letter-spacing:.12em">'+d.vin+'</p><div class="grid"><div><div class="k">Year / make / model</div><div class="v">'+[d.year,d.make,d.model].filter(Boolean).join(" ")+'</div></div><div><div class="k">Suggested test</div><div class="v">'+d.test+' · '+d.price+'</div></div><div><div class="k">Engine</div><div class="v">'+[d.engine,d.displ&&(d.displ+"L")].filter(Boolean).join(" · ")+'</div></div><div><div class="k">Fuel / GVWR</div><div class="v">'+[d.fuel,d.gvwr].filter(Boolean).join(" · ")+'</div></div></div><p class="sub" style="margin-top:12px">'+d.note+'<br>'+d.checkNote+(d.nhtsa?' · NHTSA: '+d.nhtsa:'')+'</p><p class="sub">Decode + test-type hint. Official CTC status is CARB / TRUCRS, not this page.</p><div class="row"><a href="tel:9168904427"><button class="go" type="button">Call 916-890-4427</button></a></div>';
+    }
+    function renderLog(){
+      const rows = loadLog();
+      const wrap = document.getElementById("logWrap");
+      if (!rows.length){ wrap.innerHTML = '<p class="sub">No lookups yet.</p>'; return; }
+      wrap.innerHTML = '<table><thead><tr><th>VIN</th><th>Vehicle</th><th>Test</th></tr></thead><tbody>'+rows.map(r=>'<tr><td>'+r.vin+'</td><td>'+[r.year,r.make,r.model].filter(Boolean).join(" ")+'</td><td>'+(r.test||'')+'</td></tr>').join('')+'</tbody></table>';
+    }
+    async function runOne(vinRaw){
+      const err = document.getElementById("oneErr");
+      err.textContent = "";
+      const vin = clean(vinRaw);
+      document.getElementById("vin").value = vin;
+      if (vin.length !== 17){ err.textContent = "VIN must be 17 characters."; return; }
+      try { const d = await decode(vin); addLog(d); renderResult(d); }
+      catch(e){ err.textContent = "Lookup failed: "+e.message; }
+    }
+    document.getElementById("checkOne").onclick = () => runOne(document.getElementById("vin").value);
+    document.getElementById("clearOne").onclick = () => { document.getElementById("vin").value=""; document.getElementById("result").hidden=true; };
+    document.getElementById("vin").addEventListener("keydown", e => { if (e.key==="Enter") runOne(e.target.value); });
+    document.getElementById("checkBatch").onclick = async () => {
+      const lines = document.getElementById("batch").value.split(/\s+/).map(clean).filter(v=>v.length===17);
+      for (const vin of lines){ try { addLog(await decode(vin)); } catch {} }
+      const last = loadLog()[0]; if (last) renderResult(last);
+    };
+    document.getElementById("exportCsv").onclick = () => {
+      const rows = loadLog();
+      const cols = ["ts","vin","year","make","model","engine","fuel","gvwr","test","price","checkOk","nhtsa"];
+      const csv = [cols.join(",")].concat(rows.map(r=>cols.map(c=>'"'+String(r[c]??"").replace(/"/g,'""')+'"').join(","))).join("\n");
+      const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download = "vin-desk.csv"; a.click();
+    };
+    renderLog();
+    const q = new URLSearchParams(location.search);
+    const pre = q.get("vin") || (location.hash.match(/vin=([A-HJ-NPR-Z0-9]{17})/i)||[])[1];
+    if (pre) runOne(pre);
+  </script>
 </body>
 </html>
