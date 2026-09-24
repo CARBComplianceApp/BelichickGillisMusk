@@ -1,0 +1,2 @@
+# AGENT_DASHBOARD 2026-09-23
+See workspace file AGENT_DASHBOARD_2026-09-23.md for full table. Nightly war plan. KILL dead-clock autos + PURGE shells. KEEP Aria/Donger/Larry/Ewing/Pippen/Belichick/Jordan.
